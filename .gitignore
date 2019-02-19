@@ -1,6 +1,3 @@
-/.project
-/.settings/
-
 # OS
 Thumbs.db
 ehthumbs.db
@@ -14,10 +11,13 @@ Desktop.ini
 *.tmproj
 *.tmproject
 *.sublime-*
+.idea
 .idea/
+/.project
 .project/
 .settings/
 .vscode/
+.sass-cache
 
 # Logs
 logs
