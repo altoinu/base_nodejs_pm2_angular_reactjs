@@ -13,18 +13,22 @@ var $q = require('q');
 var app_base = require('./utils/app_base.js');
 var RouteSetter = require('./utils/RouteSetter.js');
 
-var cors = require('./utils/CORS.js')({
-	'origin': [
-		'http://localhost',
-		'http://localhost:3000'
-	]
-});
+var APP_VARS = require('./models/app_vars.js');
 
 // --------------------------------------------------------------------------
 //
 // private variables
 //
 // --------------------------------------------------------------------------
+
+var port = normalizePort(APP_VARS.port);
+
+var cors = require('./utils/CORS.js')({
+	'origin': [
+		'http://localhost',
+		'http://localhost:' + port
+	]
+});
 
 var routes = RouteSetter([
 	path.join(__dirname, '/routes/ConfigRoute.js'),
@@ -41,6 +45,37 @@ var routes = RouteSetter([
 	}
 	*/
 ]);
+
+//--------------------------------------------------------------------------
+//
+// private functions
+//
+// --------------------------------------------------------------------------
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+function normalizePort(val) {
+
+	var port = parseInt(val, 10);
+
+	if (isNaN(port)) {
+
+		// named pipe
+		return val;
+
+	}
+
+	if (port >= 0) {
+
+		// port number
+		return port;
+
+	}
+
+	return false;
+
+}
 
 // --------------------------------------------------------------------------
 //
@@ -73,7 +108,7 @@ var appObj = app_base('app_base, app.js:', {
 	],
 	routeSetterDef: routes,
 	//baseUrl: CONFIG.API.path
-	serverPort: 3000,//CONFIG.API.port_internal,
+	serverPort: port
 });
 
 module.exports = {

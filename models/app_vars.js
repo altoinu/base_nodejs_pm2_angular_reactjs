@@ -6,5 +6,6 @@ var APP_DEFAULTS = require('./app_defaults.js');
 var env = process.env.NODE_ENV || APP_DEFAULTS.env;
 
 module.exports = {
-	env: env
+	env: env,
+	port: process.env.PORT || '3000'
 };

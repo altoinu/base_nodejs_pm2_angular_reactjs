@@ -1,11 +1,14 @@
 {
-	"apps": [{
-		"name": "base_nodejs_pm2_angularjs1",
-		"script": "index.js",
-		"exec_mode": "cluster",
-		"instances": 4,
-		"env": {
-			"NODE_ENV": "development"
+	"apps": [
+		{
+			"name": "base_nodejs_pm2_angularjs1",
+			"script": "index.js",
+			"exec_mode": "cluster",
+			"instances": 4,
+			"env": {
+				"NODE_ENV": "development",
+				"PORT": 3000
+			}
 		}
-	}]
+	]
 }
