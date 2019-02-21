@@ -8,6 +8,8 @@ var mod_express = require('express');
 var mod_Q = require('q');
 
 var APP_VARS = require('../models/app_vars.js');
+
+var utils = require('../utils/utils.js');
 var getENVParams = utils.getENVParams;
 
 var ENV = APP_VARS.env;
