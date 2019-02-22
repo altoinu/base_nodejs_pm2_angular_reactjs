@@ -41,14 +41,15 @@ var allow = function(corsDef, req, res, next) {
 
 		// header contains origin for CORS
 
-		if (corsDef.origin.indexOf(req.headers.origin) != -1) {
+		var is_CORS_ALLOW_ORIGIN_WILDCARD = (corsDef.origin.indexOf('*') != -1);
+		if ((corsDef.origin.indexOf(req.headers.origin) != -1) || is_CORS_ALLOW_ORIGIN_WILDCARD) {
 
 			// origin is defined in corsDef, allow cross domain
 
 			// add necessary headers
 
 			logger.log(req.headers.origin);
-			res.header('Access-Control-Allow-Origin', req.headers.origin);
+			res.header('Access-Control-Allow-Origin', is_CORS_ALLOW_ORIGIN_WILDCARD ? '*' : req.headers.origin);
 			// Access-Control-Allow-Credentials true/false
 			// Access-Control-Expose-Headers
 

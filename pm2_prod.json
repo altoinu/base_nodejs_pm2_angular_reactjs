@@ -7,7 +7,11 @@
 			"instances": 4,
 			"env": {
 				"NODE_ENV": "production",
-				"PORT": 3000
+				"PORT": 3000,
+				"CORS_ALLOW_ORIGIN": [
+					"http://localhost",
+					"http://localhost:3000"
+				]
 			}
 		}
 	]

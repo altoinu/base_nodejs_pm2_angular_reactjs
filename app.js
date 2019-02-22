@@ -24,10 +24,7 @@ var APP_VARS = require('./models/app_vars.js');
 var port = normalizePort(APP_VARS.port);
 
 var cors = require('./utils/CORS.js')({
-	'origin': [
-		'http://localhost',
-		'http://localhost:' + port
-	]
+	'origin': APP_VARS.CORS_ALLOW_ORIGIN
 });
 
 var routes = RouteSetter([
@@ -103,7 +100,7 @@ var appObj = app_base('app_base, app.js:', {
 			limit: '1mb',
 			extended: true
 		}),
-		//cors.allow,
+		cors.allow,
 		$express.static(path.join(__dirname, 'public'))
 	],
 	routeSetterDef: routes,
