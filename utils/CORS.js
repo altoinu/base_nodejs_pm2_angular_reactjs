@@ -1,10 +1,19 @@
 /**
+ * 2019/02/22
+ * version 1.0.0
+ * 
  * Usage
  * require('./CORS.js')({
  * 	"origin": [
  * 		"http://localhost",
  * 		"http://localhost:3001",
  * 		"http://www.example.com",...
+ * 	]
+ * });
+ * 
+ * require('./CORS.js')({
+ * 	"origin": [
+ * 		"*"
  * 	]
  * });
  */
