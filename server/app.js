@@ -4,6 +4,7 @@
 //
 // --------------------------------------------------------------------------
 
+var os = require('os');
 var path = require('path');
 
 var $bodyParser = require('body-parser');
@@ -79,6 +80,8 @@ function normalizePort(val) {
 // stuff
 //
 // --------------------------------------------------------------------------
+
+console.log('num cpus- ', os.cpus().length);
 
 var appObj = app_base('app_base, app.js:', {
 	appSettings: [
