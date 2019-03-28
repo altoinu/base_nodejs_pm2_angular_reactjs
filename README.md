@@ -1,5 +1,5 @@
-Node.js version - v6.11.2
-pm2 version - v2.6.1
+Node.js version - v10.15.3
+pm2 version - v3.4.1
 
 Initial set up
 - npm install
