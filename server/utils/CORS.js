@@ -1,9 +1,10 @@
 /**
- * 2019/02/22
- * version 1.0.0
+ * Express js middleware to allow CORS request on origin specified
+ * @module CORS
+ * @version 1.0.0 2019/02/22
  * 
- * Usage
- * require('./CORS.js')({
+ * @example
+ * var cors = require('./CORS.js')({
  * 	"origin": [
  * 		"http://localhost",
  * 		"http://localhost:3001",
@@ -11,12 +12,16 @@
  * 	]
  * });
  * 
- * require('./CORS.js')({
+ * // or
+ * var cors = require('./CORS.js')({
  * 	"origin": [
  * 		"*"
  * 	]
  * });
+ * 
+ * app.use(cors.allow);
  */
+
 // --------------------------------------------------------------------------
 //
 // private variables
@@ -34,8 +39,8 @@ logger.prefix = 'CORS:';
 
 /**
  * Express js middleware to allow CORS request on origin specified in corsDef
- * 
- * @param corsDef {origin: ["http://...", "http://...",...]}
+ * @alias module:CORS#allow
+ * @param {object} corsDef {origin: ["http://...", "http://...",...]}
  */
 var allow = function(corsDef, req, res, next) {
 
@@ -105,8 +110,9 @@ var allow = function(corsDef, req, res, next) {
 };
 
 /**
- * 
- * @param corsDef {origin: ["http://...", "http://...",...]}
+ * @constructor
+ * @param {object} corsDef {origin: ["http://...", "http://...",...]}
+ * @returns {object} object {allow - expressjs middleware}
  */
 var CORS = function(corsDef) {
 

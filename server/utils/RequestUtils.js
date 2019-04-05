@@ -1,3 +1,10 @@
+/**
+ * Request utils
+ * @module RequestUtils
+ * @requires multiparty
+ * @requires q
+ */
+
 var $multiparty = require('multiparty');
 var $q = require('q');
 
@@ -9,8 +16,9 @@ var $q = require('q');
  *  method,
  *  headers
  * }
- * @param request
- * @returns
+ * @alias module:RequestUtils.parsePOSTFormData
+ * @param {object} request - request object containing POSTed multipart form data
+ * @returns Promise
  */
 function parsePOSTFormData(request) {
 
@@ -64,6 +72,12 @@ function parsePOSTFormData(request) {
 
 }
 
+/**
+ * 
+ * @alias module:RequestUtils.parseJSONBodyData
+ * @param {object} request
+ * @returns Promise
+ */
 function parseJSONBodyData(request) {
 
 	return $q.resolve(request.body);

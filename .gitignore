@@ -31,3 +31,6 @@ public/js/lib
 
 # Yeoman meta-data
 .yo-rc.json
+
+# project specific
+server/jsdoc

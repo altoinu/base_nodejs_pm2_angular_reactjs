@@ -1,6 +1,9 @@
 /**
- * 2019-01-09
- * v1.1.1
+ * RouteSetter
+ * @module RouteSetter
+ * @version 1.1.1 2019-01-09
+ * @requires express
+ * @requires q
  */
 var Logger = require('../utils/Logger.js');
 var logger = new Logger();
@@ -9,19 +12,21 @@ logger.prefix = 'RouteSetter:';
 var mod_express = require('express');
 var mod_Q = require('q');
 
-/**
- * Array of path to route definition modules.
- * Each module should be either
- * - instance of express.Router(), or
- * - Object {
- * route: instance of express.Router(),
- * shutown: function(),
- * (optional) baseUrl: 'example: /api'
- * }
- */
 var routesDefObj = [];
 
-module.exports = function(routesDef) {
+/**
+ * @param {Array} routesDef - Array of path to route definition modules.<br/>
+ * Each module should be either<br/>
+ * <ul>
+ * <li>instance of express.Router(), or</li>
+ * <li>Object {<br/>
+ * route: instance of express.Router(),<br/>
+ * shutown: function(),<br/>
+ * (optional) baseUrl: 'example: /api'<br/>
+ * }</li>
+ * </ul>
+ */
+function RouteSetter(routesDef) {
 
 	// --------------------------------------------------------------------------
 	//
@@ -118,4 +123,6 @@ module.exports = function(routesDef) {
 		}
 	};
 
-};
+}
+
+module.exports = RouteSetter;

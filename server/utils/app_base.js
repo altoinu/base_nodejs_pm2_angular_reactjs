@@ -1,12 +1,40 @@
 /**
- * 2017-12-13
- * v1.1.1
+ * app base
+ * @module app_base
+ * @version 1.1.1 2017-12-13
+ * @requires express
+ * @requires cookie-parser
+ * @requires morgan
+ * @requires q
  * 
- * npm modules required:
- * - express
- * - cookie-parser
- * - morgan
- * - q
+ * @example
+ * var appObj = app_base('app_base, app.js:', {
+ * 	appSettings: [
+ * 		{
+ * 			name: 'views',
+ * 			value: path.join(__dirname, 'utils/hbs_views')
+ * 		},
+ * 		{
+ * 			name: 'view engine',
+ * 			value: 'hbs'
+ * 		}
+ * 	],
+ * 	middleware: [
+ * 		$bodyParser.json({
+ * 			limit: '1mb'
+ * 		}),
+ * 		$bodyParser.urlencoded({
+ * 			parameterLimit: 100000,
+ * 			limit: '1mb',
+ * 			extended: true
+ * 		}),
+ * 		cors.allow,
+ * 		$express.static(path.join(__dirname, '../public'))
+ * 	],
+ * 	routeSetterDef: routes,
+ * 	//baseUrl: CONFIG.API.path
+ * 	serverPort: port
+ * });
  */
 var VERSION = '1.1.1';
 //--------------------------------------------------------------------------
@@ -29,10 +57,8 @@ var mod_Q = require('q');
 // --------------------------------------------------------------------------
 
 /**
- * 
- * @param logPrefix
- * @param config
- *            {appSettings, middleware, routeSetterDef, baseUrl, serverPort}
+ * @param {string} logPrefix
+ * @param {object} config - {appSettings, middleware, routeSetterDef, baseUrl, serverPort}
  */
 var app_base = function(logPrefix, config) {
 

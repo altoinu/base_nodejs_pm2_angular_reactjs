@@ -6,6 +6,7 @@
   "scripts": {
     "bower": "bower",
     "gulp": "gulp",
+    "jsdoc": "jsdoc -P package.json -R README.md -d server/jsdoc -c server/jsdoc.config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,8 @@
     "bower": "^1.8.8",
     "gulp": "^4.0.0",
     "gulp-compass": "^2.1.0",
-    "gulp-nodemon": "^2.4.2"
+    "gulp-nodemon": "^2.4.2",
+    "jsdoc": "^3.5.5"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
