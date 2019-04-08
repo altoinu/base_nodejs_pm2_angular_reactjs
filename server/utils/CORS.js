@@ -40,7 +40,9 @@ logger.prefix = 'CORS:';
 /**
  * Express js middleware to allow CORS request on origin specified in corsDef
  * @alias module:CORS#allow
- * @param {object} corsDef {origin: ["http://...", "http://...",...]}
+ * @param req
+ * @param res
+ * @param next
  */
 var allow = function(corsDef, req, res, next) {
 
@@ -110,7 +112,6 @@ var allow = function(corsDef, req, res, next) {
 };
 
 /**
- * @constructor
  * @param {object} corsDef {origin: ["http://...", "http://...",...]}
  * @returns {object} object {allow - expressjs middleware}
  */
