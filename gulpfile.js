@@ -7,6 +7,7 @@ var nodemon = require('gulp-nodemon');
 
 // var HTML_PATH = '.';
 var HTML_PATH = 'public';
+var SERVER_PATH = 'server';
 
 // ========================================
 // serve
@@ -25,7 +26,7 @@ gulp.task('compass-web', function() {
 		css: HTML_PATH + '/css',
 		sass: HTML_PATH + '/sass',
 		image: HTML_PATH + '/images'
-	})).pipe(gulp.dest('.css'));
+	})).pipe(gulp.dest(HTML_PATH + '/css'));
 });
 
 // ========================================
@@ -49,12 +50,12 @@ gulp.task("nodemon", function(cb) {
 	return nodemon({
 
 		// nodemon our expressjs server
-		script: 'server/index.js',
+		script: SERVER_PATH + '/index.js',
 
 		// watch core server file(s) that require server restart on change
 		watch: [
-			'server/index.js',
-			'server/app.js',
+			SERVER_PATH + '/index.js',
+			SERVER_PATH + '/app.js',
 		//'folder/path/**/file.js'
 		//'folder/path/**/*.js'
 		]
