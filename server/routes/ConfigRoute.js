@@ -10,9 +10,6 @@ var mod_Q = require('q');
 var APP_VARS = require('../models/app_vars.js');
 
 var utils = require('../utils/utils.js');
-var getENVParams = utils.getENVParams;
-
-var ENV = APP_VARS.env;
 
 // --------------------------------------------------------------------------
 //
@@ -61,10 +58,10 @@ ConfigRoute.get('/config.json', function(req, res) {
 
 	var clientIP = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
-	var envParam = getENVParams(ENV);
+	var envParam = utils.getENVParams(APP_VARS.env);
 
 	var configValues = {
-		env: ENV,
+		env: APP_VARS.env,
 		envName: envParam['name'],
 		envLongName: envParam['longname'],
 		ip: clientIP,

@@ -4,6 +4,7 @@
 //
 // --------------------------------------------------------------------------
 
+var cluster = require('cluster');
 var os = require('os');
 var path = require('path');
 
@@ -81,7 +82,11 @@ function normalizePort(val) {
 //
 // --------------------------------------------------------------------------
 
+console.log('System info-')
 console.log('num cpus- ', os.cpus().length);
+console.log('nodejs version:', process.version);
+console.log('process:', process.pid);
+console.log('cluster.isMaster:', cluster.isMaster);
 
 var appObj = app_base('app_base, app.js:', {
 	appSettings: [

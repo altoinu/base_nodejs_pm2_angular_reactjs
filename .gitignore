@@ -33,4 +33,5 @@ public/js/lib
 .yo-rc.json
 
 # project specific
+server/apidoc
 server/jsdoc
