@@ -1,39 +1,50 @@
 /**
- * app base
+ * Function to create Express app and server
  * @module app_base
  * @version 1.1.1 2017-12-13
  * @requires express
  * @requires cookie-parser
  * @requires morgan
  * @requires q
+ * @requires module:RouteSetter
  * 
  * @example
  * var appObj = app_base('app_base, app.js:', {
- * 	appSettings: [
- * 		{
- * 			name: 'views',
- * 			value: path.join(__dirname, 'utils/hbs_views')
- * 		},
- * 		{
- * 			name: 'view engine',
- * 			value: 'hbs'
- * 		}
- * 	],
- * 	middleware: [
- * 		$bodyParser.json({
- * 			limit: '1mb'
- * 		}),
- * 		$bodyParser.urlencoded({
- * 			parameterLimit: 100000,
- * 			limit: '1mb',
- * 			extended: true
- * 		}),
- * 		cors.allow,
- * 		$express.static(path.join(__dirname, '../public'))
- * 	],
- * 	routeSetterDef: routes,
- * 	//baseUrl: CONFIG.API.path
- * 	serverPort: port
+ *    appSettings: [
+ *       {
+ *          name: 'views',
+ *          value: path.join(__dirname, 'utils/hbs_views')
+ *       },
+ *       {
+ *          name: 'view engine',
+ *          value: 'hbs'
+ *       }
+ *    ],
+ *    middleware: [
+ *       $bodyParser.json({
+ *          limit: '1mb'
+ *       }),
+ *       $bodyParser.urlencoded({
+ *          parameterLimit: 100000,
+ *          limit: '1mb',
+ *          extended: true
+ *       }),
+ *       cors.allow,
+ *       $express.static(path.join(__dirname, '../public'))
+ *    ],
+ *    routeSetterDef: RouteSetter([
+ *       path.join(__dirname, '/routes/ConfigRoute.js'),
+ *       {
+ *          route: express.Router() or require('...'),
+ *          baseUrl: '/whatever', //optional
+ *          shutdown: function() {
+ *             console.log('shutdown for this route');
+ *             return $q.resolve();
+ *          }
+ *       }
+ *    ]);,
+ *    baseUrl: /some/base/path,
+ *    serverPort: 3000
  * });
  */
 var VERSION = '1.1.1';
@@ -58,7 +69,13 @@ var mod_Q = require('q');
 
 /**
  * @param {string} logPrefix
- * @param {object} config - {appSettings, middleware, routeSetterDef, baseUrl, serverPort}
+ * @param {Object} config - App configuration.
+ * @param {Object[]} [config.appSettings]
+ * @param {Object[]} [config.middleware]
+ * @param {Object} [config.routeSetterDef] - RouteSetter object
+ * @param {Object} [config.baseUrl] - Base URL
+ * @param {string} config.serverPort - Port number for server.
+ * @returns {Object} Object {app, server, shutdown()}
  */
 var app_base = function(logPrefix, config) {
 

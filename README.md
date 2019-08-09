@@ -39,3 +39,26 @@ As of pm2 -v 3.5.1
    - However, if env var is removed from .json, it still remains in process.env and gets loaded.
    Not sure if this is pm2/node bug or just the way things are.
       - To prevent this, do pm2 delete to completely remove then pm2 start
+
+Generating docs
+- npm run build:doc
+	- apidoc
+	   - https://www.npmjs.com/package/apidoc
+	   - http://apidocjs.com/
+	      - http://apidocjs.com/#params
+	   - npm run build:doc:apidoc
+	      - outputs to server/apidoc
+	- jsdoc
+	   - https://www.npmjs.com/package/jsdoc
+	   - https://jsdoc.app/
+	      - https://jsdoc.app/about-getting-started.html
+	      - https://jsdoc.app/tags-example.html
+	      - Namepaths https://jsdoc.app/about-namepaths.html
+	      - Namespace https://jsdoc.app/tags-namespace.html
+	         - memberof https://jsdoc.app/tags-memberof.html
+	      - Module https://jsdoc.app/tags-module.html
+	         - param https://jsdoc.app/tags-param.html
+	         - Function https://jsdoc.app/tags-function.html
+	         - Class https://jsdoc.app/tags-class.html
+	   - npm run build:doc:jsdoc
+	      - outputs to server/jsdoc

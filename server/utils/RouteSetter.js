@@ -1,9 +1,23 @@
 /**
- * RouteSetter
+ * Module to create routes definition to be used by app_base.
  * @module RouteSetter
  * @version 1.1.1 2019-01-09
  * @requires express
  * @requires q
+ * @requires class:Logger
+ * 
+ * @example
+ * var routes = RouteSetter([
+ *    path.join(__dirname, '/routes/ConfigRoute.js'),
+ *    {
+ *       route: express.Router() or require('...'),
+ *       baseUrl: '/whatever', //optional
+ *       shutdown: function() {
+ *          console.log('shutdown for this route');
+ *          return $q.resolve();
+ *       }
+ *    }
+ * ]);
  */
 var Logger = require('../utils/Logger.js');
 var logger = new Logger();
@@ -15,16 +29,20 @@ var mod_Q = require('q');
 var routesDefObj = [];
 
 /**
- * @param {Array} routesDef - Array of path to route definition modules.<br/>
+ * @param {Object[]} routesDef - Array of path to route definition modules.<br/>
  * Each module should be either<br/>
  * <ul>
  * <li>instance of express.Router(), or</li>
  * <li>Object {<br/>
  * route: instance of express.Router(),<br/>
- * shutown: function(),<br/>
+ * (optional) shutdown: function(),<br/>
  * (optional) baseUrl: 'example: /api'<br/>
  * }</li>
  * </ul>
+ * @param {Object} routesDef[].route - instance of express.Router()
+ * @param {function} [routesDef[].shutdown]
+ * @param {string} [routesDef[].baseUrl] - Base URL
+ * @example /api
  */
 function RouteSetter(routesDef) {
 

@@ -2,21 +2,22 @@
  * Express js middleware to allow CORS request on origin specified
  * @module CORS
  * @version 1.0.0 2019/02/22
+ * @requires Logger
  * 
  * @example
  * var cors = require('./CORS.js')({
- * 	"origin": [
- * 		"http://localhost",
- * 		"http://localhost:3001",
- * 		"http://www.example.com",...
- * 	]
+ *    "origin": [
+ *       "http://localhost",
+ *       "http://localhost:3001",
+ *       "http://www.example.com",...
+ *    ]
  * });
  * 
  * // or
  * var cors = require('./CORS.js')({
- * 	"origin": [
- * 		"*"
- * 	]
+ *    "origin": [
+ *       "*"
+ *    ]
  * });
  * 
  * app.use(cors.allow);
@@ -112,8 +113,9 @@ var allow = function(corsDef, req, res, next) {
 };
 
 /**
- * @param {object} corsDef {origin: ["http://...", "http://...",...]}
- * @returns {object} object {allow - expressjs middleware}
+ * @param {Object} corsDef - CORS definition.
+ * @param {string[]} [corsDef.origin] - CORS allowed origin domain.
+ * @returns {Object} Object {allow - expressjs middleware}
  */
 var CORS = function(corsDef) {
 

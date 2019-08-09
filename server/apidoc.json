@@ -1,7 +1,6 @@
 {
-	"name": "API Documentation",
+	"name": "API Documentation NAME HERE",
 	"version": "0.0.0",
-	"description": "API Documentation",
-	"title": "API Documentation",
-	"url": "/server/apidoc/"
+	"description": "API Documentation DESCRIPTION",
+	"title": "API Documentation TITLE"
 }

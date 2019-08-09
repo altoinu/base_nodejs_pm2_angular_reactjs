@@ -1,3 +1,6 @@
+/**
+ * @private
+ */
 function consoleMethod() {
 
 	if (this.enabled) {
@@ -16,6 +19,17 @@ function consoleMethod() {
 
 }
 
+/**
+ * @class Logger
+ * @classdesc Handles logs
+ * @param {boolean} enabled Enable/disable log.
+ * 
+ * @example
+ * var Logger = require('../utils/Logger.js');
+ * var logger = new Logger();
+ * logger.prefix = 'RouteSetter:';
+ * logger.log('hello');
+ */
 var Logger = function(enabled) {
 
 	// --------------------------------------------------------------------------
@@ -24,8 +38,16 @@ var Logger = function(enabled) {
 	//
 	// --------------------------------------------------------------------------
 
+	/**
+	 * Enable/disable log.
+	 * @memberOf Logger#
+	 */
 	this.enabled = (enabled === undefined) ? true : enabled;
 
+	/**
+	 * Prefix displayed before every log.
+	 * @memberOf Logger#
+	 */
 	this.prefix = '';
 
 };
@@ -36,6 +58,9 @@ var Logger = function(enabled) {
 //
 // --------------------------------------------------------------------------
 
+/**
+ * Displays log.
+ */
 Logger.prototype.log = function() {
 
 	var args = Array.prototype.slice.call(arguments);
@@ -45,6 +70,9 @@ Logger.prototype.log = function() {
 
 };
 
+/**
+ * Displays error log.
+ */
 Logger.prototype.error = function() {
 
 	var args = Array.prototype.slice.call(arguments);

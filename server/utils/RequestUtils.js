@@ -1,6 +1,6 @@
 /**
- * Request utils
- * @module RequestUtils
+ * Utility functions related to request object.
+ * @namespace RequestUtils
  * @requires multiparty
  * @requires q
  */
@@ -8,17 +8,11 @@
 var $multiparty = require('multiparty');
 var $q = require('q');
 
-/**
- * Parse form data to {
- *  files,
- *  data,
- *  url,
- *  method,
- *  headers
- * }
- * @alias module:RequestUtils.parsePOSTFormData
+/** @function
+ * @memberof RequestUtils
+ * @description Parse form data in the request.
  * @param {object} request - request object containing POSTed multipart form data
- * @returns Promise
+ * @returns {Promise} {files, data, url, method, headers}
  */
 function parsePOSTFormData(request) {
 
@@ -73,10 +67,12 @@ function parsePOSTFormData(request) {
 }
 
 /**
- * 
- * @alias module:RequestUtils.parseJSONBodyData
- * @param {object} request
- * @returns Promise
+ * Gets request body.
+ * @function parseJSONBodyData
+ * @memberof RequestUtils
+ * @param {object} request - Express request object.
+ * @param {object} [request.body] - Body from body-parser.
+ * @returns {Promise}
  */
 function parseJSONBodyData(request) {
 
