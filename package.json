@@ -8,8 +8,8 @@
     "bower": "bower",
     "gulp": "gulp",
     "build:doc": "npm-run-all -p build:doc:*",
-    "build:doc:apidoc": "apidoc -c server/ -i server/ -o server/apidoc",
-    "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.json -d server/jsdoc",
+    "build:doc:apidoc": "apidoc -c server/ -i server/ -o docs/apidoc",
+    "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.json -d docs/jsdoc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
