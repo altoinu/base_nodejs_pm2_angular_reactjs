@@ -1,4 +1,15 @@
 /**
+ * Module to handle console.log console.error
+ * @module Logger
+ * 
+ * @example
+ * var Logger = require('Logger.js');
+ * var logger = new Logger();
+ * logger.prefix = 'RouteSetter:';
+ * logger.log('hello');
+ */
+
+/**
  * @private
  */
 function consoleMethod() {
@@ -22,10 +33,14 @@ function consoleMethod() {
 /**
  * @class Logger
  * @classdesc Handles logs
- * @param {boolean} enabled Enable/disable log.
+ * 
+ * @param {boolean} [enabled=true] Enable/disable log.
+ * 
+ * @property {boolean} [enabled=true] Enable/disable log.
+ * @property {string} [prefix=''] Prefix displayed before every log.
  * 
  * @example
- * var Logger = require('../utils/Logger.js');
+ * var Logger = require('Logger.js');
  * var logger = new Logger();
  * logger.prefix = 'RouteSetter:';
  * logger.log('hello');
@@ -34,20 +49,12 @@ var Logger = function(enabled) {
 
 	// --------------------------------------------------------------------------
 	//
-	// public variables
+	// public properties
 	//
 	// --------------------------------------------------------------------------
 
-	/**
-	 * Enable/disable log.
-	 * @memberOf Logger#
-	 */
 	this.enabled = (enabled === undefined) ? true : enabled;
 
-	/**
-	 * Prefix displayed before every log.
-	 * @memberOf Logger#
-	 */
 	this.prefix = '';
 
 };
@@ -60,6 +67,7 @@ var Logger = function(enabled) {
 
 /**
  * Displays log.
+ * @param {...Object} arguments Contents to display in log.
  */
 Logger.prototype.log = function() {
 
@@ -72,6 +80,7 @@ Logger.prototype.log = function() {
 
 /**
  * Displays error log.
+ * @param {...Object} arguments Contents to display in error log.
  */
 Logger.prototype.error = function() {
 

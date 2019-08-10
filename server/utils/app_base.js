@@ -9,6 +9,7 @@
  * @requires module:RouteSetter
  * 
  * @example
+ * var app_base = require('app_base.js');
  * var appObj = app_base('app_base, app.js:', {
  *    appSettings: [
  *       {
@@ -46,8 +47,11 @@
  *    baseUrl: /some/base/path,
  *    serverPort: 3000
  * });
+ * 
+ * @todo Sample TODO text
  */
 var VERSION = '1.1.1';
+
 //--------------------------------------------------------------------------
 //
 // required Node JS modules
@@ -75,7 +79,6 @@ var mod_Q = require('q');
  * @param {Object} [config.routeSetterDef] - RouteSetter object
  * @param {Object} [config.baseUrl] - Base URL
  * @param {string} config.serverPort - Port number for server.
- * @returns {Object} Object {app, server, shutdown()}
  */
 var app_base = function(logPrefix, config) {
 
@@ -266,4 +269,18 @@ var app_base = function(logPrefix, config) {
 }
 
 app_base.version = VERSION;
+
+/**
+ * @class
+ * @classdesc test class inside module description
+ * @param blah
+ */
+function TestClassInside_app_base(blah) {
+
+	this.data = 'wow';
+
+	this.blah = blah ? blah : 'hi';
+
+}
+
 module.exports = app_base;

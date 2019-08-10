@@ -4,7 +4,7 @@
  * @version 1.1.1 2019-01-09
  * @requires express
  * @requires q
- * @requires class:Logger
+ * @requires Logger
  * 
  * @example
  * var routes = RouteSetter([
@@ -19,6 +19,7 @@
  *    }
  * ]);
  */
+
 var Logger = require('../utils/Logger.js');
 var logger = new Logger();
 logger.prefix = 'RouteSetter:';
@@ -29,19 +30,16 @@ var mod_Q = require('q');
 var routesDefObj = [];
 
 /**
- * @param {Object[]} routesDef - Array of path to route definition modules.<br/>
+ * @param {Object[]} routesDef - Array route definition.<br/>
  * Each module should be either<br/>
  * <ul>
+ * <li>file path to module, or</li>
  * <li>instance of express.Router(), or</li>
- * <li>Object {<br/>
- * route: instance of express.Router(),<br/>
- * (optional) shutdown: function(),<br/>
- * (optional) baseUrl: 'example: /api'<br/>
- * }</li>
+ * <li>Object {route, (optional) shutdown, (optional) baseUrl}</li>
  * </ul>
- * @param {Object} routesDef[].route - instance of express.Router()
- * @param {function} [routesDef[].shutdown]
- * @param {string} [routesDef[].baseUrl] - Base URL
+ * @param {(express.Router())} routesDef[].route - instance of express.Router()
+ * @param {function} [routesDef[].shutdown] function()
+ * @param {string} [routesDef[].baseUrl=''] - Base URL, ex '/api'
  * @example /api
  */
 function RouteSetter(routesDef) {
