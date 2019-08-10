@@ -54,8 +54,18 @@ var Logger = function(enabled) {
 	//
 	// --------------------------------------------------------------------------
 
+	/**
+	 * Enable/disable log.
+	 * @type {boolean}
+	 * @default true
+	 */
 	this.enabled = (enabled === undefined) ? true : enabled;
 
+	/**
+	 * Prefix displayed before every log.
+	 * @type {string}
+	 * @default ''
+	 */
 	this.prefix = '';
 
 };

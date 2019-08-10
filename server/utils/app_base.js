@@ -270,17 +270,4 @@ var app_base = function(logPrefix, config) {
 
 app_base.version = VERSION;
 
-/**
- * @class
- * @classdesc test class inside module description
- * @param blah
- */
-function TestClassInside_app_base(blah) {
-
-	this.data = 'wow';
-
-	this.blah = blah ? blah : 'hi';
-
-}
-
 module.exports = app_base;
