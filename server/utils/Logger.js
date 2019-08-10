@@ -1,6 +1,7 @@
 /**
  * Module to handle console.log console.error
  * @module Logger
+ * @version 1.0.0
  * 
  * @example
  * var Logger = require('Logger.js');

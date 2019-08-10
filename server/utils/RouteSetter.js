@@ -40,7 +40,6 @@ var routesDefObj = [];
  * @param {(express.Router())} routesDef[].route - instance of express.Router()
  * @param {function} [routesDef[].shutdown] function()
  * @param {string} [routesDef[].baseUrl=''] - Base URL, ex '/api'
- * @example /api
  */
 function RouteSetter(routesDef) {
 
