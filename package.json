@@ -5,6 +5,7 @@
   "description": "description here",
   "main": "server/index.js",
   "scripts": {
+    "install": "bower install",
     "bower": "bower",
     "gulp": "gulp",
     "build:doc": "npm-run-all -p build:doc:*",

@@ -7,7 +7,6 @@ pm2 version
 ## Initial set up
 ```
 npm install
-bower install (or npm run bower install)
 ```
 
 ## To start/restart:
