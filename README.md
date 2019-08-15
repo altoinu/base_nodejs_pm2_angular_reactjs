@@ -1,12 +1,11 @@
 ## Node stuff
-Node.js version
-- v10.16.0
-pm2 version
-- v3.5.1
+- Node.js (v10.16.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- Yarn [https://yarnpkg.com/](https://yarnpkg.com/)
+- PM2 (v3.5.1) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 ## Initial set up
 ```
-npm install
+yarn install
 ```
 
 ## To start/restart:

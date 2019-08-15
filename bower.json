@@ -20,6 +20,7 @@
     "requirejs": "^2.3.6",
     "angular-bootstrap": "^2.5.0",
     "angularAMD": "^0.2.1",
-    "angular-ui-router": "0.2.18"
+    "angular-ui-router": "0.2.18",
+    "angular": "^1.7.8"
   }
 }
