@@ -15,6 +15,11 @@ require.config({
 		// https://github.com/angular-ui/bootstrap
 		'angular-ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
 
+		// ngRoute - $routeProvider
+		// https://docs.angularjs.org/api/ngRoute
+		//'angular-route': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route',
+
+		// AngularUI Router - Nested views ($stateProvider, $urlRouterProvider)
 		// https://ui-router.github.io/
 		// https://github.com/angular-ui/ui-router
 		// https://github.com/angular-ui/ui-router/tree/legacy
@@ -22,9 +27,7 @@ require.config({
 		'angular-ui-router': 'lib/angular-ui-router/release/angular-ui-router.min',
 		//'angular-ui-router': '//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router',
 
-		// https://docs.angularjs.org/api/ngRoute
-		'angular-route': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route',
-
+		// AngularAMD
 		// https://marcoslin.github.io/angularAMD/#/home
 		// https://github.com/marcoslin/angularAMD
 		'angularAMD': 'lib/angularAMD/angularAMD.min',
@@ -55,12 +58,14 @@ require.config({
 				'angular'
 			]
 		},
-		'angular-ui-router': {
+		/*
+		'angular-route': {
 			deps: [
 				'angular'
 			]
 		},
-		'angular-route': {
+		*/
+		'angular-ui-router': {
 			deps: [
 				'angular'
 			]

@@ -3,8 +3,8 @@ define([
 	'angular-animate',
 	'angular-touch',
 	'angular-ui-bootstrap',
-	'angular-ui-router',
-	'angular-route',
+	//'angular-route',
+	'angular-ui-router'
 ], function(angularAMD) {
 
 	'use strict';
@@ -13,15 +13,15 @@ define([
 		'ngAnimate',
 		'ngTouch',
 		'ui.bootstrap',
-		'ui.router',
-		'ngRoute'
+		//'ngRoute',
+		'ui.router'
 	]);
 
+	//'$routeProvider'
 	app.config([
-		'$routeProvider',
 		'$stateProvider',
 		'$urlRouterProvider',
-		function($routeProvider, $stateProvider, $urlRouterProvider) {
+		function($stateProvider, $urlRouterProvider) {
 
 			//console.log($routeProvider);
 			//console.log($stateProvider);
