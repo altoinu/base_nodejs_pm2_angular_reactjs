@@ -3,13 +3,13 @@ require.config({
 	baseUrl: 'js',
 	paths: {
 		// https://angularjs.org/
-		'angular': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min',
+		'angular': '//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min',
 
 		// https://docs.angularjs.org/api/ngAnimate
-		'angular-animate': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate',
+		'angular-animate': '//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate',
 
 		// https://docs.angularjs.org/api/ngTouch
-		'angular-touch': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-touch',
+		'angular-touch': '//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-touch',
 
 		// http://angular-ui.github.io/bootstrap/
 		// https://github.com/angular-ui/bootstrap
@@ -17,7 +17,7 @@ require.config({
 
 		// ngRoute - $routeProvider
 		// https://docs.angularjs.org/api/ngRoute
-		//'angular-route': '//ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route',
+		//'angular-route': '//ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route',
 
 		// AngularUI Router - Nested views ($stateProvider, $urlRouterProvider)
 		// https://ui-router.github.io/
