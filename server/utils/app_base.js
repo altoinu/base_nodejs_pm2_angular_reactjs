@@ -63,6 +63,7 @@ var mod_cookieParser = require('cookie-parser');
 var mod_morgan = require('morgan');
 var mod_Q = require('q');
 
+var CONSTANTS = require('../models/constants.js');
 //var ObjectUtils = require('./ObjectUtils.js');
 
 // --------------------------------------------------------------------------
@@ -178,7 +179,8 @@ var app_base = function(logPrefix, config) {
 
 	function isDevEnv() {
 
-		return app.get('env') === 'development';
+		//return app.get('env') === 'development';
+		return app.get('env') === CONSTANTS.ENV.DEV.name;
 
 	}
 

@@ -92,7 +92,7 @@ var appObj = app_base('app_base, app.js:', {
 	appSettings: [
 		{
 			name: 'views',
-			value: path.join(__dirname, 'utils/hbs_views')
+			value: path.join(__dirname, 'hbs_views')
 		},
 		{
 			name: 'view engine',
