@@ -14,8 +14,12 @@ var SERVER_PATH = 'server';
 // ========================================
 gulp.task('dev', [
 	'compass-web',
+	'compass-web-watch',
 	'nodemon'
 ], function() {
+
+	console.log('gulp development task');
+
 });
 
 // ========================================
@@ -29,17 +33,21 @@ gulp.task('compass-web', function() {
 	})).pipe(gulp.dest(HTML_PATH + '/css'));
 });
 
-// ========================================
-// Compass watcher
-// ========================================
-var watcher = gulp.watch([
-	HTML_PATH + '/sass/**/*.scss'
-], [
-	'compass-web'
-]);
+//========================================
+//Compass watcher
+//========================================
+gulp.task('compass-web-watch', function() {
 
-watcher.on('change', function(event) {
-	console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+	var watcher = gulp.watch([
+		HTML_PATH + '/sass/**/*.scss'
+	], [
+		'compass-web'
+	]);
+
+	watcher.on('change', function(event) {
+		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+	});
+
 });
 
 //========================================
