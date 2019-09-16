@@ -1,7 +1,7 @@
 /**
  * Module to handle console.log console.error
  * @module Logger
- * @version 1.0.0
+ * @version 1.1.0
  * 
  * @example
  * var Logger = require('Logger.js');
@@ -9,6 +9,8 @@
  * logger.prefix = 'RouteSetter:';
  * logger.log('hello');
  */
+
+'use strict';
 
 /**
  * @private
@@ -90,6 +92,19 @@ Logger.prototype.log = function() {
 };
 
 /**
+ * Displays warn log.
+ * @param {...Object} arguments Contents to display in warn log.
+ */
+Logger.prototype.warn = function() {
+
+	var args = Array.prototype.slice.call(arguments);
+	consoleMethod.apply(this, [
+		'warn'
+	].concat(args));
+
+};
+
+/**
  * Displays error log.
  * @param {...Object} arguments Contents to display in error log.
  */
@@ -102,4 +117,25 @@ Logger.prototype.error = function() {
 
 };
 
-module.exports = Logger;
+var logger = new Logger();
+logger.prefix = 'LOGGER:';
+
+if (typeof define === 'function') {
+
+	define([
+		'require'
+	], function(require) {
+
+		logger.log('requirejs define Logger');
+
+		return Logger;
+
+	});
+
+} else {
+
+	logger.log('module.exports Logger');
+
+	module.exports = Logger;
+
+}
