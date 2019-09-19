@@ -7,7 +7,7 @@
 var mod_express = require('express');
 var mod_Q = require('q');
 
-var APP_VARS = require('../models/app_vars.js');
+var app_vars = require('../models/app_vars.js');
 
 var utils = require('../utils/utils.js');
 
@@ -102,10 +102,10 @@ ConfigRoute.get('/config.json', function(req, res) {
 
 	var clientIP = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
-	var envParam = utils.getENVParams(APP_VARS.env);
+	var envParam = utils.getENVParams(app_vars.env);
 
 	var configValues = {
-		env: APP_VARS.env,
+		env: app_vars.env,
 		envName: envParam['name'],
 		envLongName: envParam['longname'],
 		ip: clientIP,

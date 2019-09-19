@@ -15,7 +15,7 @@ var $q = require('q');
 var app_base = require('./utils/app_base.js');
 var RouteSetter = require('./utils/RouteSetter.js');
 
-var APP_VARS = require('./models/app_vars.js');
+var app_vars = require('./models/app_vars.js');
 
 // --------------------------------------------------------------------------
 //
@@ -23,10 +23,10 @@ var APP_VARS = require('./models/app_vars.js');
 //
 // --------------------------------------------------------------------------
 
-var port = normalizePort(APP_VARS.port);
+var port = normalizePort(app_vars.port);
 
 var cors = require('./utils/CORS.js')({
-	'origin': APP_VARS.CORS_ALLOW_ORIGIN
+	'origin': app_vars.CORS_ALLOW_ORIGIN
 });
 
 var routes = RouteSetter([
