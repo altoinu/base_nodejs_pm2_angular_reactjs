@@ -27,7 +27,6 @@ npm-debug.log*
 # Dependency directories
 bower_components/
 node_modules/
-public/js/lib
 
 # Yeoman meta-data
 .yo-rc.json
