@@ -11,7 +11,7 @@ module.exports = {
 			//'interpreter': 'node@10.15.2',
 
 			'exec_mode': 'cluster',
-			'instances': -1,
+			'instances': 0,
 			//'interpreter' is not available when using cluster mode
 
 			//'watch': true,
