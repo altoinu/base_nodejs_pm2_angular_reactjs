@@ -2,9 +2,9 @@
 [https://help.github.com/en/articles/basic-writing-and-formatting-syntax](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 ## Node stuff
-- Node.js (v10.16.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- Node.js (v12.13.0) and npm [https://nodejs.org/](https://nodejs.org/)
 - Yarn [https://yarnpkg.com/](https://yarnpkg.com/)
-- PM2 (v3.5.1) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+- PM2 (v4.1.2) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 ### Notes on bower
 [https://bower.io/blog/2017/how-to-migrate-away-from-bower/](https://bower.io/blog/2017/how-to-migrate-away-from-bower/)<br/>

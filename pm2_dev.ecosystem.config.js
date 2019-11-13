@@ -4,14 +4,14 @@ module.exports = {
 			'name': 'base_nodejs_pm2_angularjs1',
 			'script': 'server/index.js',
 
-			'exec_mode': 'fork',
+			//'exec_mode': 'fork',
 			// Use different version of node via nvm.
 			// If not specified, defaults to system 'node'
 			//'interpreter': 'node@10.16.0',
 			//'interpreter': 'node@10.15.2',
 
-			//'exec_mode': 'cluster',
-			//'instances': 4,
+			'exec_mode': 'cluster',
+			'instances': -1,
 			//'interpreter' is not available when using cluster mode
 
 			//'watch': true,
