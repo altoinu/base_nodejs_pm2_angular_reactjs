@@ -3,16 +3,11 @@
 
 ## Node stuff
 - Node.js (v12.13.0) and npm [https://nodejs.org/](https://nodejs.org/)
-- Yarn [https://yarnpkg.com/](https://yarnpkg.com/)
 - PM2 (v4.1.2) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
-
-### Notes on bower
-[https://bower.io/blog/2017/how-to-migrate-away-from-bower/](https://bower.io/blog/2017/how-to-migrate-away-from-bower/)<br/>
-may want to clean out bower stuff eventually
 
 ## Initial set up
 ```
-yarn install
+npm install
 ```
 
 ## To start/restart:
