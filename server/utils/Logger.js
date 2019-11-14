@@ -1,7 +1,7 @@
 /**
  * Module to handle console.log console.error
  * @module Logger
- * @version 1.1.0
+ * @version 1.1.1
  * 
  * @example
  * var Logger = require('Logger.js');
@@ -10,132 +10,136 @@
  * logger.log('hello');
  */
 
-'use strict';
+(function() {
 
-/**
- * @private
- */
-function consoleMethod() {
+	'use strict';
 
-	if (this.enabled) {
+	/**
+	 * @private
+	 */
+	function consoleMethod() {
 
-		var args = Array.prototype.slice.call(arguments);
-		var method = args[0];
+		if (this.enabled) {
 
-		// if (args.length > 1)
-		// args[0] = logPrefix + args[0];
+			var args = Array.prototype.slice.call(arguments);
+			var method = args[0];
 
-		console[method].apply(console, [
-			this.prefix
-		].concat(args.slice(1)));
+			// if (args.length > 1)
+			// args[0] = logPrefix + args[0];
+
+			console[method].apply(console, [
+				this.prefix
+			].concat(args.slice(1)));
+
+		}
 
 	}
 
-}
+	/**
+	 * @class Logger
+	 * @classdesc Handles logs
+	 * 
+	 * @param {boolean} [enabled=true] Enable/disable log.
+	 * 
+	 * @property {boolean} [enabled=true] Enable/disable log.
+	 * @property {string} [prefix=''] Prefix displayed before every log.
+	 * 
+	 * @example
+	 * var Logger = require('Logger.js');
+	 * var logger = new Logger();
+	 * logger.prefix = 'RouteSetter:';
+	 * logger.log('hello');
+	 */
+	var Logger = function(enabled) {
 
-/**
- * @class Logger
- * @classdesc Handles logs
- * 
- * @param {boolean} [enabled=true] Enable/disable log.
- * 
- * @property {boolean} [enabled=true] Enable/disable log.
- * @property {string} [prefix=''] Prefix displayed before every log.
- * 
- * @example
- * var Logger = require('Logger.js');
- * var logger = new Logger();
- * logger.prefix = 'RouteSetter:';
- * logger.log('hello');
- */
-var Logger = function(enabled) {
+		// --------------------------------------------------------------------------
+		//
+		// public properties
+		//
+		// --------------------------------------------------------------------------
+
+		/**
+		 * Enable/disable log.
+		 * @type {boolean}
+		 * @default true
+		 */
+		this.enabled = (enabled === undefined) ? true : enabled;
+
+		/**
+		 * Prefix displayed before every log.
+		 * @type {string}
+		 * @default ''
+		 */
+		this.prefix = '';
+
+	};
 
 	// --------------------------------------------------------------------------
 	//
-	// public properties
+	// public methods
 	//
 	// --------------------------------------------------------------------------
 
 	/**
-	 * Enable/disable log.
-	 * @type {boolean}
-	 * @default true
+	 * Displays log.
+	 * @param {...Object} arguments Contents to display in log.
 	 */
-	this.enabled = (enabled === undefined) ? true : enabled;
+	Logger.prototype.log = function() {
+
+		var args = Array.prototype.slice.call(arguments);
+		consoleMethod.apply(this, [
+			'log'
+		].concat(args));
+
+	};
 
 	/**
-	 * Prefix displayed before every log.
-	 * @type {string}
-	 * @default ''
+	 * Displays warn log.
+	 * @param {...Object} arguments Contents to display in warn log.
 	 */
-	this.prefix = '';
+	Logger.prototype.warn = function() {
 
-};
+		var args = Array.prototype.slice.call(arguments);
+		consoleMethod.apply(this, [
+			'warn'
+		].concat(args));
 
-// --------------------------------------------------------------------------
-//
-// public methods
-//
-// --------------------------------------------------------------------------
+	};
 
-/**
- * Displays log.
- * @param {...Object} arguments Contents to display in log.
- */
-Logger.prototype.log = function() {
+	/**
+	 * Displays error log.
+	 * @param {...Object} arguments Contents to display in error log.
+	 */
+	Logger.prototype.error = function() {
 
-	var args = Array.prototype.slice.call(arguments);
-	consoleMethod.apply(this, [
-		'log'
-	].concat(args));
+		var args = Array.prototype.slice.call(arguments);
+		consoleMethod.apply(this, [
+			'error'
+		].concat(args));
 
-};
+	};
 
-/**
- * Displays warn log.
- * @param {...Object} arguments Contents to display in warn log.
- */
-Logger.prototype.warn = function() {
+	var logger = new Logger();
+	logger.prefix = 'LOGGER:';
 
-	var args = Array.prototype.slice.call(arguments);
-	consoleMethod.apply(this, [
-		'warn'
-	].concat(args));
+	if (typeof define === 'function') {
 
-};
+		define([
+			'require'
+		], function(require) {
 
-/**
- * Displays error log.
- * @param {...Object} arguments Contents to display in error log.
- */
-Logger.prototype.error = function() {
+			logger.log('requirejs define Logger');
 
-	var args = Array.prototype.slice.call(arguments);
-	consoleMethod.apply(this, [
-		'error'
-	].concat(args));
+			return Logger;
 
-};
+		});
 
-var logger = new Logger();
-logger.prefix = 'LOGGER:';
+	} else {
 
-if (typeof define === 'function') {
+		logger.log('module.exports Logger');
 
-	define([
-		'require'
-	], function(require) {
+		module.exports = Logger;
 
-		logger.log('requirejs define Logger');
+	}
 
-		return Logger;
-
-	});
-
-} else {
-
-	logger.log('module.exports Logger');
-
-	module.exports = Logger;
-
-}
+})();
