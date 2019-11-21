@@ -6,6 +6,7 @@
   "main": "server/index.js",
   "scripts": {
     "gulp": "gulp",
+    "ng": "ng",
     "build:doc": "npm-run-all -p build:doc:*",
     "build:doc:apidoc": "apidoc -c server/ -i server/ -o docs/apidoc",
     "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.js -r -d docs/jsdoc",
@@ -18,6 +19,7 @@
   "author": "Kaoru Kawashima",
   "license": "ISC",
   "devDependencies": {
+    "@angular/cli": "^8.3.19",
     "apidoc": "^0.17.7",
     "gulp": "^4.0.2",
     "gulp-compass": "^2.1.0",
