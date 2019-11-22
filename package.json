@@ -4,13 +4,21 @@
   "private": true,
   "description": "description here",
   "main": "server/index.js",
+  "config": {
+    "angularProjectName": "my-app"
+  },
   "scripts": {
+    "postinstall": "npm-run-all -s setup build",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
     "ng": "ng",
+    "setup": "npm-run-all -p setup:*",
+    "setup:angular": "cd $npm_package_config_angularProjectName && npm install",
+    "build": "npm-run-all -p build:*",
+    "build:angular": "cd $npm_package_config_angularProjectName && ng build --prod",
     "build:doc": "npm-run-all -p build:doc:*",
     "build:doc:apidoc": "apidoc -c server/ -i server/ -o docs/apidoc",
-    "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.js -r -d docs/jsdoc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.js -r -d docs/jsdoc"
   },
   "repository": {
     "type": "git",
