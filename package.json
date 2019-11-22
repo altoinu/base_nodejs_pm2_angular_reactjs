@@ -5,7 +5,7 @@
   "description": "description here",
   "main": "server/index.js",
   "config": {
-    "angularProjectName": "my-app"
+    "angularProjectName": "my-angular-app"
   },
   "scripts": {
     "postinstall": "npm-run-all -s setup build",

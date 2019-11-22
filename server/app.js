@@ -111,7 +111,7 @@ var appObj = app_base('app_base, app.js:', {
 		cors.allow,
 		//$express.static(path.join(__dirname, '../public'))
 		//$express.static(path.join(__dirname, '../public_angularjs1'))
-		$express.static(path.join(__dirname, '../my-app/dist/my-app'))
+		$express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
 	],
 	routeSetterDef: routes,
 	//baseUrl: CONFIG.API.path
