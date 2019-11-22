@@ -51,6 +51,35 @@ As of pm2 -v 3.5.1
     Not sure if this is pm2/node bug or just the way things are.
         - To prevent this, do pm2 delete to completely remove then pm2 start
 
+## Building Everything
+```
+npm run build
+```
+
+## Angular Frontend
+Angular is installed as dev dependency, and used to build front end stuff. cd into my-angular-app to make updates:
+
+```
+cd my-angular-app
+
+npm run ng -- serve
+or
+npm run ng -- build
+```
+
+Running nodejs server with pm2, and ng build with watch option
+
+```
+pm2 start [ecosystem config file].js
+cd my-angular-app
+npm run ng -- build --watch
+```
+
+### Building
+```
+npm run build:angular
+```
+
 ## Generating docs
 ```
 npm run build:doc
