@@ -1,15 +1,15 @@
 var CONSTANTS = require('../models/constants.js');
 
-function getENVParams(env) {
+function getENVConstants(envName) {
 
 	for ( var prop in CONSTANTS.ENV) {
 
-		if (env == CONSTANTS.ENV[prop].name)
+		if (envName == CONSTANTS.ENV[prop].name)
 			return CONSTANTS.ENV[prop];
 
 	}
 
-	// default if no match
+	// default development if no match
 	return CONSTANTS.ENV.DEV;
 
 }
@@ -45,6 +45,6 @@ function getFileExtension(contentType) {
 }
 
 module.exports = {
-	getENVParams: getENVParams,
+	getENVConstants: getENVConstants,
 	getFileExtension: getFileExtension,
 };
