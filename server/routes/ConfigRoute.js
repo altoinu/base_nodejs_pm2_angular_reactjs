@@ -102,12 +102,12 @@ ConfigRoute.get('/config.json', function(req, res) {
 
 	var clientIP = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
-	var envParam = utils.getENVParams(app_vars.env);
+	var envConstants = utils.getENVConstants(app_vars.env);
 
 	var configValues = {
 		env: app_vars.env,
-		envName: envParam['name'],
-		envLongName: envParam['longname'],
+		envName: envConstants['name'],
+		envLongName: envConstants['longname'],
 		ip: clientIP,
 	};
 
