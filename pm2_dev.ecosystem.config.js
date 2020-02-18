@@ -13,6 +13,12 @@ module.exports = {
 			'exec_mode': 'cluster',
 			'instances': 0,
 			//'interpreter' is not available when using cluster mode
+			'node_args': [
+				//'--inspect'
+				//'--debug-port=6000',
+				//'--inspect=6000'
+				//'--max_old_space_size=8192'
+			],
 
 			//'watch': true,
 			'watch': [
