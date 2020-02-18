@@ -6,16 +6,16 @@ var compass = require('gulp-compass');
 var nodemon = require('gulp-nodemon');
 
 // var HTML_PATH = '.';
-var HTML_PATH = 'public';
+var HTML_PATH = 'public_angularjs1';
 var SERVER_PATH = 'server';
 
 // ========================================
 // serve
 // ========================================
-gulp.task('dev', [
+gulp.task('development', [
 	'compass-web',
 	'compass-web-watch',
-	'nodemon'
+//'nodemon'
 ], function() {
 
 	console.log('gulp development task');
@@ -53,7 +53,7 @@ gulp.task('compass-web-watch', function() {
 //========================================
 //Nodemon
 //========================================
-gulp.task("nodemon", function(cb) {
+gulp.task('nodemon', function(cb) {
 	var called = false;
 	return nodemon({
 
