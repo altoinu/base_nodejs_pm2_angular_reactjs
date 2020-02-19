@@ -5,7 +5,8 @@
   "description": "description here",
   "main": "server/index.js",
   "config": {
-    "angularProjectName": "my-angular-app"
+    "angularProjectName": "my-angular-app",
+    "reactjsProjectName": "my-react-app"
   },
   "scripts": {
     "postinstall": "npm-run-all -s setup build",
@@ -14,8 +15,10 @@
     "ng": "ng",
     "setup": "npm-run-all -p setup:*",
     "setup:angular": "cd $npm_package_config_angularProjectName && npm install",
+    "setup:reactjs": "cd $npm_package_config_reactjsProjectName && npm install",
     "build": "npm-run-all -p build:*",
     "build:angular": "cd $npm_package_config_angularProjectName && ng build --prod",
+    "build:reactjs": "cd $npm_package_config_reactjsProjectName && npm run build",
     "build:doc": "npm-run-all -p build:doc:*",
     "build:doc:apidoc": "apidoc -c server/ -i server/ -o docs/apidoc",
     "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.js -r -d docs/jsdoc"
