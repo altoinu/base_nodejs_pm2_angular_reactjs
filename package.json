@@ -5,7 +5,8 @@
   "description": "description here",
   "main": "server/index.js",
   "config": {
-    "angularProjectName": "my-angular-app"
+    "angularProjectName": "my-angular-app",
+    "reactjsProjectName": "my-react-app"
   },
   "scripts": {
     "postinstall": "npm-run-all -s setup build",
@@ -14,8 +15,10 @@
     "ng": "ng",
     "setup": "npm-run-all -p setup:*",
     "setup:angular": "cd $npm_package_config_angularProjectName && npm install",
+    "setup:reactjs": "cd $npm_package_config_reactjsProjectName && npm install",
     "build": "npm-run-all -p build:*",
     "build:angular": "cd $npm_package_config_angularProjectName && ng build --prod",
+    "build:reactjs": "cd $npm_package_config_reactjsProjectName && npm run build",
     "build:doc": "npm-run-all -p build:doc:*",
     "build:doc:apidoc": "apidoc -c server/ -i server/ -o docs/apidoc",
     "build:doc:jsdoc": "jsdoc -P package.json -R README.md -c server/jsdoc.config.js -r -d docs/jsdoc"
@@ -27,12 +30,13 @@
   "author": "Kaoru Kawashima",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^8.3.19",
-    "apidoc": "^0.17.7",
+    "@angular/cli": "^9.0.3",
+    "apidoc": "^0.20.0",
     "gulp": "^4.0.2",
     "gulp-compass": "^2.1.0",
     "gulp-nodemon": "^2.4.2",
     "jsdoc": "^3.6.3",
+    "mocha": "^7.0.1",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
@@ -40,7 +44,7 @@
     "cookie-parser": "^1.4.4",
     "cuid": "^2.1.6",
     "express": "^4.17.1",
-    "hbs": "^4.0.4",
+    "hbs": "^4.1.0",
     "morgan": "^1.9.1",
     "multiparty": "^4.2.1",
     "q": "^1.5.1",

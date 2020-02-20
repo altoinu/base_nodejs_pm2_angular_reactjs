@@ -2,8 +2,8 @@
 [https://help.github.com/en/articles/basic-writing-and-formatting-syntax](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 ## Node stuff
-- Node.js (v13.3.0) and npm [https://nodejs.org/](https://nodejs.org/)
-- PM2 (v4.2.1) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+- Node.js (v13.9.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- PM2 (v4.2.3) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 ## Initial set up
 ```
@@ -78,6 +78,22 @@ npm run ng -- build --watch
 ### Building
 ```
 npm run build:angular
+```
+
+## React Frontend
+
+```
+cd my-react-app
+npm run start
+```
+
+Running nodejs server with pm2
+
+```
+cd my-react-app
+npm run build
+cd ..
+pm2 start [ecosystem config file].js
 ```
 
 ## Generating docs
