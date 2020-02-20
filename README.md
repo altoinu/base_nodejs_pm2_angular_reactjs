@@ -75,7 +75,8 @@ cd my-angular-app
 npm run ng -- build --watch
 ```
 
-### Building
+Building for production
+
 ```
 npm run build:angular
 ```
@@ -90,10 +91,14 @@ npm run start
 Running nodejs server with pm2
 
 ```
-cd my-react-app
-npm run build
-cd ..
+npm run build:reactjs
 pm2 start [ecosystem config file].js
+```
+
+Building for production
+
+```
+npm run build:reactjs
 ```
 
 ## Generating docs
