@@ -2,8 +2,8 @@
 [https://help.github.com/en/articles/basic-writing-and-formatting-syntax](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 ## Node stuff
-- Node.js (v12.13.0) and npm [https://nodejs.org/](https://nodejs.org/)
-- PM2 (v4.1.2) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+- Node.js (v13.9.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- PM2 (v4.2.3) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 ## Initial set up
 ```
@@ -50,6 +50,56 @@ As of pm2 -v 3.5.1
     - However if env var is removed from .js/json, it still remains in process.env and gets loaded.
     Not sure if this is pm2/node bug or just the way things are.
         - To prevent this, do pm2 delete to completely remove then pm2 start
+
+## Building Everything
+```
+npm run build
+```
+
+## Angular Frontend
+Angular is installed as dev dependency, and used to build front end stuff. cd into my-angular-app to make updates:
+
+```
+cd my-angular-app
+
+npm run ng -- serve
+or
+npm run ng -- build
+```
+
+Running nodejs server with pm2, and ng build with watch option
+
+```
+pm2 start [ecosystem config file].js
+cd my-angular-app
+npm run ng -- build --watch
+```
+
+Building for production
+
+```
+npm run build:angular
+```
+
+## React Frontend
+
+```
+cd my-react-app
+npm run start
+```
+
+Running nodejs server with pm2
+
+```
+npm run build:reactjs
+pm2 start [ecosystem config file].js
+```
+
+Building for production
+
+```
+npm run build:reactjs
+```
 
 ## Generating docs
 ```
