@@ -5,7 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const blah = {
-    text: 'really cool app'
+    text: 'really cool app',
+    foobar: 'woot'
 };
 
 

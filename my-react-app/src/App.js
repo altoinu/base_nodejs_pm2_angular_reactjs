@@ -1,7 +1,14 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import RandomCoolComponent from './components/RandomCoolComponent';
+import About from './components/About';
 
 function App(props) {
 
@@ -19,11 +26,29 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <Router>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to={'/about/' + props.blah.foobar}>About</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/about/:superduperparam">
+              <About />
+            </Route>
+            <Route path="/">
+              <RandomCoolComponent blah={props.blah}
+                onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
+            </Route>
+          </Switch>
+        </Router>
         <p>
           Edit <code>src/App.js</code> and save to reload.<br />
-          <RandomCoolComponent blah={props.blah}
-            onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
-          {/*Here is props.blah.text: {props.blah.text}*/}
         </p>
         <a
           className="App-link"
