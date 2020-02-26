@@ -78,14 +78,13 @@ class RandomCoolComponent extends React.Component {
 
     render() {
 
-        var props = this.props;
-
         return (
             <div>
                 <p>Current time is: {this.state.date.toLocaleTimeString()}</p>
                 <p>Some variable within RandomCoolComponent: {someVariable} </p>
-                <p>Here is props.blah.text: {props.blah.text}</p>
+                <p>Here is props.blah.text: {this.props.blah.text}</p>
                 <button onClick={(e) => this.onButtonClick.call(this, e, 'I got clicked')}>What time is it?</button>
+                {/* Passing children */}
                 <SomeNeatNumberList numbers={someNeatData}>
                     <h3>This is some numbers list</h3>
                     <span>fancy list, yo</span>

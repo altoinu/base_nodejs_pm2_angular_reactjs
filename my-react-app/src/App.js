@@ -39,7 +39,7 @@ function App(props) {
           </nav>
           <Switch>
             <Route path="/about/:superduperparam">
-              <About />
+              <About someprop={'Hello world'}/>
             </Route>
             <Route path="/">
               <RandomCoolComponent blah={props.blah}
