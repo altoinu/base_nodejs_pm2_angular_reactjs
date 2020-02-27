@@ -1,7 +1,15 @@
 import React from 'react';
+import {
+  BrowserRouter,
+  HashRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
 import RandomCoolComponent from './components/RandomCoolComponent';
+import About from './components/About';
 
 function App(props) {
 
@@ -19,11 +27,37 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        {/*
+        <HashRouter> - like angularjs, appends hash # in URL.
+        or
+        <BrowserRouter basename="/path/to/here">
+        - Also needs "homepage": "/path/to/here" set in package.json
+        https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+        https://muffinman.io/react-router-subfolder-on-server/
+        */}
+        <BrowserRouter basename="/react">
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to={'/about/' + props.blah.foobar}>About</Link>
+              </li>
+            </ul>
+          </nav>
+          <Switch>
+            <Route path="/about/:superduperparam">
+              <About someprop={'Hello world'}/>
+            </Route>
+            <Route path="/">
+              <RandomCoolComponent blah={props.blah}
+                onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
         <p>
           Edit <code>src/App.js</code> and save to reload.<br />
-          <RandomCoolComponent blah={props.blah}
-            onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
-          {/*Here is props.blah.text: {props.blah.text}*/}
         </p>
         <a
           className="App-link"
