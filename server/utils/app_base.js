@@ -50,7 +50,7 @@
  * 
  * @todo Sample TODO text
  */
-var VERSION = '1.1.1';
+var VERSION = '1.2.0';
 
 //--------------------------------------------------------------------------
 //
@@ -81,7 +81,7 @@ var CONSTANTS = require('../models/constants.js');
  * @param {Object} [config.baseUrl] - Base URL
  * @param {string} config.serverPort - Port number for server.
  */
-var app_base = function(logPrefix, config) {
+var app_base = function (logPrefix, config) {
 
 	// --------------------------------------------------------------------------
 	//
@@ -118,7 +118,7 @@ var app_base = function(logPrefix, config) {
 
 		}
 
-		appSettings.forEach(function(setting, index, array) {
+		appSettings.forEach(function (setting, index, array) {
 
 			app.set(setting.name, setting.value);
 
@@ -140,9 +140,52 @@ var app_base = function(logPrefix, config) {
 
 		}
 
-		middleware.forEach(function(mid, index, array) {
+		middleware.forEach(function (mid, index, array) {
 
-			app.use(mid);
+			var expressMiddlewareMethod = 'use';
+			if (mid.hasOwnProperty('method')) {
+
+				// https://expressjs.com/en/4x/api.html#app.METHOD
+				switch (mid.method.toLowerCase()) {
+
+					case 'all':
+					case 'checkout':
+					case 'copy':
+					case 'delete':
+					case 'get':
+					case 'head':
+					case 'lock':
+					case 'merge':
+					case 'mkactivity':
+					case 'mkcol':
+					case 'move':
+					case 'm-search':
+					case 'notify':
+					case 'options':
+					case 'patch':
+					case 'post':
+					case 'purge':
+					case 'put':
+					case 'report':
+					case 'search':
+					case 'subscribe':
+					case 'trace':
+					case 'unlock':
+					case 'unsubscribe':
+						expressMiddlewareMethod = mid.method.toLowerCase();
+						break;
+
+					default:
+						expressMiddlewareMethod = 'use';
+
+				}
+
+			}
+
+			if (mid.hasOwnProperty('baseUrl'))
+				app[expressMiddlewareMethod](mid.baseUrl, mid.middleware);
+			else
+				app[expressMiddlewareMethod](mid);
 
 		});
 
@@ -161,7 +204,7 @@ var app_base = function(logPrefix, config) {
 	}
 
 	// catch 404 and forward to error handler
-	app.use(function(req, res, next) {
+	app.use(function (req, res, next) {
 
 		var err = new Error('Not Found');
 		err.status = 404;
@@ -170,7 +213,7 @@ var app_base = function(logPrefix, config) {
 	});
 
 	// error handlers
-	app.use(function(err, req, res, next) {
+	app.use(function (err, req, res, next) {
 
 		res.status(err.status || 500);
 		next(err);
@@ -212,7 +255,7 @@ var app_base = function(logPrefix, config) {
 	}
 
 	// return as json if .json is in URL
-	app.use('/\*.json', function(err, req, res, next) {
+	app.use('/\*.json', function (err, req, res, next) {
 
 		console.log('.json error');
 
@@ -225,7 +268,7 @@ var app_base = function(logPrefix, config) {
 	});
 
 	// or render
-	app.use(function(err, req, res, next) {
+	app.use(function (err, req, res, next) {
 
 		console.log('render error');
 
@@ -235,7 +278,7 @@ var app_base = function(logPrefix, config) {
 	});
 
 	// server
-	var server = app.listen(serverPort, function() {
+	var server = app.listen(serverPort, function () {
 
 		var host = server.address().address;
 		var port = server.address().port;
@@ -247,14 +290,14 @@ var app_base = function(logPrefix, config) {
 	return {
 		app: app,
 		server: server,
-		shutdown: function() {
+		shutdown: function () {
 
 			return mod_Q.allSettled([
 				// shutdown server
-				(function() {
+				(function () {
 
 					var deferred = mod_Q.defer();
-					server.close(function() {
+					server.close(function () {
 						deferred.resolve(server);
 					});
 
