@@ -110,9 +110,39 @@ var appObj = app_base('app_base, app.js:', {
 		}),
 		cors.allow,
 		//$express.static(path.join(__dirname, '../public'))
-		//$express.static(path.join(__dirname, '../public_angularjs1'))
-		//$express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
-		$express.static(path.join(__dirname, '../my-react-app/build'))
+		// Angularjs front end *********************************************************
+		{
+			baseUrl: '/angularjs',
+			middleware: $express.static(path.join(__dirname, '../public_angularjs1')),
+		},
+		// Angular front end ***********************************************************
+		{
+			baseUrl: '/angular',
+			middleware: $express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
+		},
+		// React front end *************************************************************
+		{
+			baseUrl: '/react',
+			middleware: $express.static(path.join(__dirname, '../my-react-app/build'))
+		},
+		{
+			// For when using client side routing like react-router and sub folder on server
+			// (ex http://www.example.com/path/to/react/app/)
+			// https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+			// https://muffinman.io/react-router-subfolder-on-server/
+			baseUrl: '/react/*',
+			method: 'GET',
+			middleware: function (req, res) {
+
+				console.log('react redirect', req.url, '-> index.html');
+				//console.log(req.path);
+				//console.log(req.url);
+
+				// redirect to index.html so client side routing can take over
+				res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+
+			}
+		}
 	],
 	routeSetterDef: routes,
 	//baseUrl: CONFIG.API.path
@@ -121,7 +151,7 @@ var appObj = app_base('app_base, app.js:', {
 
 module.exports = {
 	app: appObj.app,
-	shutdown: function() {
+	shutdown: function () {
 		// do necessary shutdown stuff here
 		return appObj.shutdown();
 	}
