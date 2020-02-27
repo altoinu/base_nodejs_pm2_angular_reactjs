@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  HashRouter,
   Switch,
   Route,
   Link
@@ -26,7 +27,15 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Router>
+        {/*
+        <HashRouter> - like angularjs, appends hash # in URL.
+        or
+        <BrowserRouter basename="/path/to/here">
+        - Also needs "homepage": "/path/to/here" set in package.json
+        https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+        https://muffinman.io/react-router-subfolder-on-server/
+        */}
+        <BrowserRouter basename="/react">
           <nav>
             <ul>
               <li>
@@ -39,14 +48,14 @@ function App(props) {
           </nav>
           <Switch>
             <Route path="/about/:superduperparam">
-              <About />
+              <About someprop={'Hello world'}/>
             </Route>
             <Route path="/">
               <RandomCoolComponent blah={props.blah}
                 onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
             </Route>
           </Switch>
-        </Router>
+        </BrowserRouter>
         <p>
           Edit <code>src/App.js</code> and save to reload.<br />
         </p>
