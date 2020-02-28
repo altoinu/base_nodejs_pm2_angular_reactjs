@@ -1,7 +1,7 @@
 /**
  * Function to create Express app and server
  * @module app_base
- * @version 1.1.1 2017-12-13
+ * @version 1.2.1 2020-02-28
  * @requires express
  * @requires cookie-parser
  * @requires morgan
@@ -31,7 +31,19 @@
  *          extended: true
  *       }),
  *       cors.allow,
- *       $express.static(path.join(__dirname, '../public'))
+ *       $express.static(path.join(__dirname, '../public')),
+ *       {
+ *          baseUrl: '/react',
+ *          middleware: $express.static(path.join(__dirname, '../my-react-app/build'))
+ *       },
+ *       {
+ *          baseUrl: '/react/*',
+ *          method: 'GET',
+ *          middleware: function (req, res) {
+ *             // redirect to index.html
+ *             res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+ *          }
+ *       }
  *    ],
  *    routeSetterDef: RouteSetter([
  *       path.join(__dirname, '/routes/ConfigRoute.js'),
@@ -44,13 +56,13 @@
  *          }
  *       }
  *    ]);,
- *    baseUrl: /some/base/path,
+ *    baseUrl: '/some/base/path',
  *    serverPort: 3000
  * });
  * 
  * @todo Sample TODO text
  */
-var VERSION = '1.2.0';
+var VERSION = '1.2.1';
 
 //--------------------------------------------------------------------------
 //
@@ -97,6 +109,8 @@ var app_base = function (logPrefix, config) {
 	var middleware = config.hasOwnProperty('middleware') ? config.middleware : null;
 	var routeSetterDef = config.hasOwnProperty('routeSetterDef') ? config.routeSetterDef : null;
 	var baseUrl = config.hasOwnProperty('baseUrl') ? config.baseUrl : null;
+	if (baseUrl)
+		baseUrl = (baseUrl.charAt(0) != '/' ? '/' : '') + baseUrl;
 	var serverPort = config.hasOwnProperty('serverPort') ? config.serverPort : null;
 
 	var app = mod_express();
@@ -142,7 +156,7 @@ var app_base = function (logPrefix, config) {
 
 		middleware.forEach(function (mid, index, array) {
 
-			var expressMiddlewareMethod = 'use';
+			var targetMiddlewareMethod = 'use';
 			if (mid.hasOwnProperty('method')) {
 
 				// https://expressjs.com/en/4x/api.html#app.METHOD
@@ -172,20 +186,23 @@ var app_base = function (logPrefix, config) {
 					case 'trace':
 					case 'unlock':
 					case 'unsubscribe':
-						expressMiddlewareMethod = mid.method.toLowerCase();
+						targetMiddlewareMethod = mid.method.toLowerCase();
 						break;
 
 					default:
-						expressMiddlewareMethod = 'use';
+						targetMiddlewareMethod = 'use';
 
 				}
 
 			}
 
-			if (mid.hasOwnProperty('baseUrl'))
-				app[expressMiddlewareMethod](mid.baseUrl, mid.middleware);
+			var targetMiddlewareBaseUrl = (baseUrl ? baseUrl : '') + (mid.hasOwnProperty('baseUrl') ? mid.baseUrl : '');
+			var targetMiddleware = mid.hasOwnProperty('middleware') ? mid.middleware : mid;
+
+			if (targetMiddlewareBaseUrl.length > 0)
+				app[targetMiddlewareMethod](targetMiddlewareBaseUrl, targetMiddleware);
 			else
-				app[expressMiddlewareMethod](mid);
+				app[targetMiddlewareMethod](targetMiddleware);
 
 		});
 
@@ -197,7 +214,7 @@ var app_base = function (logPrefix, config) {
 		// If path specified, mount routes to there [baseUrl]/[routeSetterDef routes]...
 		// (ex baseUrl == /api then /api/[routeSetterDef routes]...
 		if (baseUrl)
-			app.use((baseUrl.charAt(0) != '/' ? '/' : '') + baseUrl, routeSetterDef.routes);
+			app.use(baseUrl, routeSetterDef.routes);
 		else
 			app.use(routeSetterDef.routes);
 
