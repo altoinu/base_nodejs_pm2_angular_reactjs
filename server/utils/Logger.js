@@ -10,6 +10,8 @@
  * logger.log('hello');
  */
 
+// TODO: Anonymous function is needed if this file is being used on front end
+// (ex via requirejs) but it also breaks jsdoc
 (function() {
 
 	'use strict';

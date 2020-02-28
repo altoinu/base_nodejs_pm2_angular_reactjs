@@ -11,6 +11,14 @@ import './App.css';
 import RandomCoolComponent from './components/RandomCoolComponent';
 import About from './components/About';
 
+function NoMatch404(props) {
+
+  return (
+    <div>404 no matching URL</div>
+  );
+
+}
+
 function App(props) {
 
   function buttonGotClicked(date, numClicks) {
@@ -47,13 +55,18 @@ function App(props) {
             </ul>
           </nav>
           <Switch>
-            <Route path="/about/:superduperparam">
-              <About someprop={'Hello world'}/>
-            </Route>
-            <Route path="/">
+            <Route path="/" exact>
               <RandomCoolComponent blah={props.blah}
                 onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
             </Route>
+            <Route path="/about/:superduperparam">
+              <About someprop={'Hello world'} />
+            </Route>
+            {/*
+            fallback 404 page
+            https://tylermcginnis.com/react-router-handling-404-pages/
+            */}
+            <Route component={NoMatch404} />
           </Switch>
         </BrowserRouter>
         <p>
