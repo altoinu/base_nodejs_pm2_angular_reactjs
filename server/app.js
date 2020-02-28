@@ -134,7 +134,7 @@ var appObj = app_base('app_base, app.js:', {
 			method: 'GET',
 			middleware: function (req, res) {
 
-				console.log('react redirect', req.url, '-> index.html');
+				console.log('redirect for React', req.url, '-> index.html');
 				//console.log(req.path);
 				//console.log(req.url);
 
@@ -145,6 +145,7 @@ var appObj = app_base('app_base, app.js:', {
 		}
 	],
 	routeSetterDef: routes,
+	//baseUrl: '/some/base/path',
 	//baseUrl: CONFIG.API.path
 	serverPort: port
 });
