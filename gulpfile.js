@@ -1,80 +1,41 @@
-// ========================================
-// deps
-// ========================================
-var gulp = require('gulp');
+const {series, parallel, watch, src, dest} = require('gulp');
+const sourcemaps = require('gulp-sourcemaps');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+
 var compass = require('gulp-compass');
 var nodemon = require('gulp-nodemon');
 
 // var HTML_PATH = '.';
-var HTML_PATH = 'public_angularjs1';
-var SERVER_PATH = 'server';
+var HTML_PATH = [
+	'public_angularjs1',
+	// 'my-react-app'
+];
 
-// ========================================
-// serve
-// ========================================
-gulp.task('development', [
-	'compass-web',
-	'compass-web-watch',
-//'nodemon'
-], function() {
+function scssTask() {
 
-	console.log('gulp development task');
+	var path = HTML_PATH[0];
 
-});
+	return src(path + '/sass/**/*.scss')
+		.pipe(sourcemaps.init())
+		.pipe(sass())
+		.pipe(postcss([autoprefixer(), cssnano()]))
+		.pipe(sourcemaps.write('.'))
+		.pipe(dest(dest(path + '/css')));
 
-// ========================================
-// Compass
-// ========================================
-gulp.task('compass-web', function() {
-	return gulp.src(HTML_PATH + '/sass/**/*.scss').pipe(compass({
-		css: HTML_PATH + '/css',
-		sass: HTML_PATH + '/sass',
-		image: HTML_PATH + '/images'
-	})).pipe(gulp.dest(HTML_PATH + '/css'));
-});
+}
 
-//========================================
-//Compass watcher
-//========================================
-gulp.task('compass-web-watch', function() {
+function watchTask() {
 
-	var watcher = gulp.watch([
-		HTML_PATH + '/sass/**/*.scss'
-	], [
-		'compass-web'
-	]);
+	var path = HTML_PATH[0];
 
-	watcher.on('change', function(event) {
-		console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-	});
+	watch([
+		path + '/sass/**/*.scss'
+	], parallel(scssTask));
 
-});
+}
 
-//========================================
-//Nodemon
-//========================================
-gulp.task('nodemon', function(cb) {
-	var called = false;
-	return nodemon({
-
-		// nodemon our expressjs server
-		script: SERVER_PATH + '/index.js',
-
-		// watch core server file(s) that require server restart on change
-		watch: [
-			SERVER_PATH + '/index.js',
-			SERVER_PATH + '/app.js',
-		//'folder/path/**/file.js'
-		//'folder/path/**/*.js'
-		]
-
-	}).on('start', function onStart() {
-		// ensure start only got called once
-		if (!called) {
-			cb();
-		}
-		called = true;
-	}).on('restart', function onRestart() {
-
-	});
-});
+exports.scssTask = scssTask;
+exports.development = series(parallel(scssTask), watchTask);
