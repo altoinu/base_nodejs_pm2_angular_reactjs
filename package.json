@@ -9,7 +9,7 @@
     "reactjsProjectName": "my-react-app"
   },
   "scripts": {
-    "postinstall": "npm-run-all -s setup build",
+    "postinstall": "npm-run-all -s setup",
     "test": "mocha",
     "gulp": "gulp",
     "ng": "ng",
