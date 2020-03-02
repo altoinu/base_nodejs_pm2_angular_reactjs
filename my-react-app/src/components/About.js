@@ -1,5 +1,9 @@
 import React from 'react';
-import {useParams} from "react-router-dom";
+import {
+	useHistory,
+	useLocation,
+	useParams
+} from "react-router-dom";
 
 class AboutInternalComponent extends React.Component {
 
@@ -7,8 +11,8 @@ class AboutInternalComponent extends React.Component {
 
 		return (
 			<div>
-				<p>This is some really nice About page. We got superduperparam from URL: {this.props.superduperparam}</p>
-				<p>Buwahahaha, and another props.someprop: {this.props.someprop}</p>
+				<p>This is some really nice About page.<br />We got superduperparam from URL: {this.props.superduperparam}</p>
+				<p>Buwahahaha, and another normally passed<br />this.props.someprop: {this.props.someprop}</p>
 			</div>
 		);
 
@@ -18,7 +22,16 @@ class AboutInternalComponent extends React.Component {
 
 function About(props) {
 
+	let history = useHistory();
+	let location = useLocation();
+
+	let params = useParams();
+	//let superduperparam = params.superduperparam;
 	let {superduperparam} = useParams();
+
+	console.log('history in About', history);
+	console.log('location in About', location);
+	console.log('params in About', params);
 
 	/* hmm, useParams doesn't work with this
 	return class extends React.Component {

@@ -67,8 +67,17 @@ function App(props) {
                     to="/">Fill in some form</Link>
                 </li>
                 <li className="nav-item">
+                  {/*
                   <Link className="nav-link"
                     to={'/about/' + props.blah.foobar}>About</Link>
+                  */}
+                  <Link className="nav-link"
+                    to={{
+                      pathname: '/about/' + props.blah.foobar,
+                      state: {
+                        someUserDefined: 'Custom data that entered as state object: ' + props.blah.foobar
+                      }
+                    }}>About</Link>
                 </li>
               </ul>
             </nav>

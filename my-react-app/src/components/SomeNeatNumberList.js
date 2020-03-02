@@ -16,15 +16,13 @@ class SomeNeatNumberList extends React.Component {
 
 	render() {
 
-		var props = this.props;
-
-		var listItems = props.numbers.map((item) => (
+		var listItems = this.props.numbers.map((item) => (
 			<ListItem key={item.id.toString()} value={item.name} />
 		));
 
 		return (
 			<div>
-				{props.children}
+				{this.props.children}
 				<ul>
 					{listItems}
 				</ul >

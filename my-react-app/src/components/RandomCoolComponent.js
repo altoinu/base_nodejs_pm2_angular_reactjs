@@ -71,6 +71,7 @@ class RandomCoolComponent extends React.Component {
 
         someVariable++;
 
+        // Send data back up to parent via method defined by this.props
         // https://reactjs.org/docs/lifting-state-up.html
         this.props.onRandomButtonClick(this.state.date, someVariable);
 
