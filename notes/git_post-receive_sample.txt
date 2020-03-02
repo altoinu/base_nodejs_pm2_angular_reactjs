@@ -1,0 +1,17 @@
+#!/bin/sh
+#GIT_WORK_TREE=/home/devadmin/stitcher.ws git checkout -f review
+#git --git-dir=/home/devadmin/stitcher.ws/.git pull
+
+# Update local project dir
+unset GIT_DIR
+cd ~/stitcher.ws
+git reset --hard HEAD
+git pull
+
+# Make sure node modules are up to date
+cd ~/stitcher.ws/server
+npm install
+
+# graceful restart
+cd ~/stitcher.ws
+pm2 startOrGracefulReload pm2_dev.json -m
