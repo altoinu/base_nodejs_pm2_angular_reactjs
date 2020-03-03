@@ -50,7 +50,9 @@ function App(props) {
         <HashRouter> - like angularjs, appends hash # in URL.
         or
         <BrowserRouter basename="/path/to/here">
-        - Also needs "homepage": "/path/to/here" set in package.json
+        - basename - used by react router during client side routing
+        - "homepage" set in package.json - used by build process so generated HTML file can refer to stuff to include
+          - example: "homepage": "/path/to/here"
         https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
         https://muffinman.io/react-router-subfolder-on-server/
         */}

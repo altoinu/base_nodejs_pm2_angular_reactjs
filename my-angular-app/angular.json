@@ -56,7 +56,8 @@
                   "maximumError": "10kb"
                 }
               ],
-              "baseHref": "."
+              "baseHref": "/angular/",
+              "deployUrl": "/angular/"
             }
           }
         },
