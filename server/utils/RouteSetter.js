@@ -1,7 +1,7 @@
 /**
  * Module to create routes definition to be used by app_base.
  * @module RouteSetter
- * @version 1.1.1 2019-01-09
+ * @version 1.1.2 2020-03-02
  * @requires express
  * @requires q
  * @requires Logger
@@ -57,7 +57,7 @@ function RouteSetter(routesDef) {
 	//
 	// --------------------------------------------------------------------------
 
-	var routeCheck = function(req, res, next) {
+	var routeCheck = function (req, res, next) {
 
 		logger.log('================================================Route');
 		logger.log('req.originalUrl', req.method, req.originalUrl);
@@ -78,12 +78,13 @@ function RouteSetter(routesDef) {
 
 	};
 
+	router.use(routeCheck);
+
 	var subRouter = mod_express.Router();
-	subRouter.use(routeCheck);
 
 	// Read and set defined routes
 	var args = Array.prototype.slice.call(routesDef);
-	args.forEach(function(def, i, array) {
+	args.forEach(function (def, i, array) {
 
 		logger.log(def);
 
@@ -95,27 +96,20 @@ function RouteSetter(routesDef) {
 
 		routesDefObj.push(r);
 
-		if (r.hasOwnProperty('route')) {
+		var targetRoute = r.hasOwnProperty('route') ? r.route : r;
+		var targetBaseUrl = (r.hasOwnProperty('baseUrl') && r.baseUrl) ? r.baseUrl : null;
+		if (targetBaseUrl)
+			targetBaseUrl = (targetBaseUrl.charAt(0) != '/' ? '/' : '') + targetBaseUrl;
 
-			if (r.hasOwnProperty('baseUrl') && r.baseUrl) {
+		var subSubRouter = mod_express.Router();
+		subSubRouter.use(routeCheck);
+		subSubRouter.use(targetRoute);
 
-				// put this route under defined baseUrl
-				var subSubRouter = mod_express.Router();
-				subSubRouter.use(routeCheck);
-				subSubRouter.use(r.route);
-				subRouter.use(r.baseUrl, subSubRouter);
-
-			} else {
-
-				subRouter.use(r.route);
-
-			}
-
-		} else {
-
-			subRouter.use(r);
-
-		}
+		// If path specified, mount routes to there [baseUrl]/[routes]...
+		if (targetBaseUrl)
+			subRouter.use(targetBaseUrl, subSubRouter);
+		else
+			subRouter.use(targetRoute);
 
 	});
 
@@ -123,10 +117,10 @@ function RouteSetter(routesDef) {
 
 	return {
 		routes: router,
-		shutdown: function() {
+		shutdown: function () {
 
 			// run shutdown stuff for each route
-			return mod_Q.allSettled(routesDefObj.map(function(def, index, array) {
+			return mod_Q.allSettled(routesDefObj.map(function (def, index, array) {
 
 				if (def.hasOwnProperty('shutdown') && (typeof def.shutdown === 'function'))
 					return def.shutdown();
