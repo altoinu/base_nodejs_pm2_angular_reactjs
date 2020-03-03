@@ -22,6 +22,7 @@ class SomeNeatNumberList extends React.Component {
 
 		return (
 			<div>
+				{/* child elements defined in parent */}
 				{this.props.children}
 				<ul>
 					{listItems}
