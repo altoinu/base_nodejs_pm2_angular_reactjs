@@ -1,0 +1,21 @@
+<div>
+	<p #MyParagraph>Current time is: {{date.toLocaleTimeString()}}</p>
+	<p #MyParagraph>Some variable within RandomCoolComponent: {{someVariable}} </p>
+	<p>Here is blah.text: {{blah.text}}</p>
+	<button type="button" class="btn btn-success" (click)="buttonGotClicked($event, 'I got clicked')">What time is it?</button>
+	<some-neat-number-list [numbers]="someNeatData">
+		<h3>This is some numbers list</h3>
+		<span>fancy list, yo</span>
+	</some-neat-number-list>
+	<!--
+	<p>Current time is: {this.state.date.toLocaleTimeString()}</p>
+	<p>Some variable within RandomCoolComponent: {someVariable} </p>
+	<p>Here is props.blah.text: {this.props.blah.text}</p>
+	<button type="button" className="btn btn-success" onClick={(e)=> this.onButtonClick.call(this, e, 'I got
+		clicked')}>What time is it?</button>
+		<SomeNeatNumberList numbers={someNeatData}>
+			<h3>This is some numbers list</h3>
+			<span>fancy list, yo</span>
+		</SomeNeatNumberList>
+	-->
+</div>
