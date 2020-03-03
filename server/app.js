@@ -120,6 +120,25 @@ var appObj = app_base('app_base, app.js:', {
 			baseUrl: '/angular',
 			middleware: $express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
 		},
+		{
+			// For when using client side routing like angular router and sub folder on server
+			// (ex http://www.example.com/path/to/angular/app/)
+			// https://angular.io/cli/build
+			// https://shekhargulati.com/2017/07/06/angular-4-use-of-base-href-and-deploy-url-build-options/
+			// https://stackoverflow.com/questions/51182322/whats-the-difference-between-base-href-and-deploy-url-parameters-of-angular
+			baseUrl: '/angular/*',
+			method: 'GET',
+			middleware: function (req, res) {
+
+				console.log('redirect for Angular', req.url, '-> index.html');
+				//console.log(req.path);
+				//console.log(req.url);
+
+				// redirect to index.html so client side routing can take over
+				res.sendFile(path.join(__dirname, '../my-angular-app/dist/my-angular-app', 'index.html'));
+
+			}
+		},
 		// React front end *************************************************************
 		{
 			baseUrl: '/react',
