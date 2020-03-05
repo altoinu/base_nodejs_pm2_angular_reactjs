@@ -1,16 +1,22 @@
 /**
  * Module to create routes definition to be used by app_base.
  * @module RouteSetter
- * @version 1.1.2 2020-03-02
+ * @version 1.1.3 2020-03-05
  * @requires express
  * @requires q
  * @requires Logger
  * 
  * @example
  * var routes = RouteSetter([
+ *    // path to module
  *    path.join(__dirname, '/routes/ConfigRoute.js'),
+ *    // instance of express.Router()
+ *    express.Router(),
+ *    // require('path to express.Router() module'),
+ *    require(path.join(__dirname, '/routes/ConfigRoute.js')),
+ *    // object
  *    {
- *       route: express.Router() or require('...'),
+ *       route: path to module, instance of express.Router(), or require('path to express.Router() module'),
  *       baseUrl: '/whatever', //optional
  *       shutdown: function() {
  *          console.log('shutdown for this route');
@@ -35,9 +41,11 @@ var routesDefObj = [];
  * <ul>
  * <li>file path to module, or</li>
  * <li>instance of express.Router(), or</li>
+ * <li>require('path to express.Router() module'), or</li>
  * <li>Object {route, (optional) shutdown, (optional) baseUrl}</li>
  * </ul>
- * @param {(express.Router())} routesDef[].route - instance of express.Router()
+ * @param {(express.Router())} routesDef[].route - path to module, instance of express.Router(),
+ * or require('path to express.Router() module'),
  * @param {function} [routesDef[].shutdown] function()
  * @param {string} [routesDef[].baseUrl=''] - Base URL, ex '/api'
  */
@@ -57,13 +65,16 @@ function RouteSetter(routesDef) {
 	//
 	// --------------------------------------------------------------------------
 
-	var routeCheck = function (req, res, next) {
+	var routeCheck = function (targetBaseUrl, req, res, next) {
 
 		logger.log('================================================Route');
 		logger.log('req.originalUrl', req.method, req.originalUrl);
 		logger.log('req.baseUrl', req.baseUrl);
 		logger.log('req.path', req.path);
 		logger.log('req.url', req.url);
+		
+		if (targetBaseUrl)
+			logger.log('baseUrl for this route:', targetBaseUrl);
 
 		if (req.query) {
 
@@ -78,7 +89,7 @@ function RouteSetter(routesDef) {
 
 	};
 
-	router.use(routeCheck);
+	router.use(routeCheck.bind(this, null));
 
 	var subRouter = mod_express.Router();
 
@@ -97,12 +108,15 @@ function RouteSetter(routesDef) {
 		routesDefObj.push(r);
 
 		var targetRoute = r.hasOwnProperty('route') ? r.route : r;
+		if (typeof (targetRoute) === 'string')
+			targetRoute = require(targetRoute);
+
 		var targetBaseUrl = (r.hasOwnProperty('baseUrl') && r.baseUrl) ? r.baseUrl : null;
 		if (targetBaseUrl)
 			targetBaseUrl = (targetBaseUrl.charAt(0) != '/' ? '/' : '') + targetBaseUrl;
 
 		var subSubRouter = mod_express.Router();
-		subSubRouter.use(routeCheck);
+		subSubRouter.use(routeCheck.bind(this, targetBaseUrl));
 		subSubRouter.use(targetRoute);
 
 		// If path specified, mount routes to there [baseUrl]/[routes]...

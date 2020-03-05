@@ -29,22 +29,6 @@ var cors = require('./utils/CORS.js')({
 	'origin': app_vars.CORS_ALLOW_ORIGIN
 });
 
-var routes = RouteSetter([
-	path.join(__dirname, '/routes/ConfigRoute.js'),
-	/*
-	{
-		route: express.Router() require('...'),
-		baseUrl: '/whatever', //optional
-		shutdown: function() {
-			
-			console.log('shutdown for this route');
-			return $q.resolve();
-			
-		}
-	}
-	*/
-]);
-
 //--------------------------------------------------------------------------
 //
 // private functions
@@ -118,8 +102,33 @@ var appObj = app_base('app_base, app.js:', {
 		// Angular front end ***********************************************************
 		{
 			baseUrl: '/angular',
-			middleware: $express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
+			middleware: (function () {
+
+				var router = $express.Router();
+
+				router.use($express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app')));
+
+				// For when using client side routing like angular router and sub folder on server
+				// (ex http://www.example.com/path/to/angular/app/)
+				// https://angular.io/cli/build
+				// https://shekhargulati.com/2017/07/06/angular-4-use-of-base-href-and-deploy-url-build-options/
+				// https://stackoverflow.com/questions/51182322/whats-the-difference-between-base-href-and-deploy-url-parameters-of-angular
+				router.get('/*', function (req, res) {
+
+					console.log('redirect for Angular, yo!', req.baseUrl, req.url, '-> index.html');
+					//console.log(req.path);
+					//console.log(req.url);
+
+					// redirect to index.html so client side routing can take over
+					res.sendFile(path.join(__dirname, '../my-angular-app/dist/my-angular-app', 'index.html'));
+
+				});
+
+				return router;
+
+			})()
 		},
+		/*
 		{
 			// For when using client side routing like angular router and sub folder on server
 			// (ex http://www.example.com/path/to/angular/app/)
@@ -130,7 +139,7 @@ var appObj = app_base('app_base, app.js:', {
 			method: 'GET',
 			middleware: function (req, res) {
 
-				console.log('redirect for Angular', req.url, '-> index.html');
+				console.log('redirect for Angular', req.baseUrl, req.url, '-> index.html');
 				//console.log(req.path);
 				//console.log(req.url);
 
@@ -139,11 +148,36 @@ var appObj = app_base('app_base, app.js:', {
 
 			}
 		},
+		*/
 		// React front end *************************************************************
 		{
 			baseUrl: '/react',
-			middleware: $express.static(path.join(__dirname, '../my-react-app/build'))
+			middleware: (function () {
+
+				var router = $express.Router();
+
+				router.use($express.static(path.join(__dirname, '../my-react-app/build')));
+
+				// For when using client side routing like react-router and sub folder on server
+				// (ex http://www.example.com/path/to/react/app/)
+				// https://create-react-app.dev/docs/deployment/#serving-apps-with-client-side-routing
+				// https://muffinman.io/react-router-subfolder-on-server/
+				router.get('/*', function (req, res) {
+
+					console.log('redirect for React, yo!', req.baseUrl, req.url, '-> index.html');
+					//console.log(req.path);
+					//console.log(req.url);
+
+					// redirect to index.html so client side routing can take over
+					res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+
+				});
+
+				return router;
+
+			})()
 		},
+		/*
 		{
 			// For when using client side routing like react-router and sub folder on server
 			// (ex http://www.example.com/path/to/react/app/)
@@ -162,8 +196,33 @@ var appObj = app_base('app_base, app.js:', {
 
 			}
 		}
+		*/
 	],
-	routeSetterDef: routes,
+	routeSetterDef: RouteSetter([
+		path.join(__dirname, '/routes/ConfigRoute.js'),
+		/*
+		{
+			route: path.join(__dirname, '/routes/ConfigRoute.js'),
+			baseUrl: '/whatever', //optional
+			shutdown: function () {
+
+				console.log('shutdown for this route');
+				return $q.resolve();
+
+			}
+		}
+		{
+			route: path to module, instance of express.Router(), or require('path to express.Router() module'),
+			baseUrl: '/whatever', //optional
+			shutdown: function() {
+				
+				console.log('shutdown for this route');
+				return $q.resolve();
+				
+			}
+		}
+		*/
+	]),
 	//baseUrl: '/some/base/path',
 	//baseUrl: CONFIG.API.path
 	serverPort: port
