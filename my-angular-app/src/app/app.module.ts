@@ -5,18 +5,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RandomCoolComponent } from './components/random-cool.component';
 import { SomeNeatNumberList } from './components/some-neat-number-list.component';
+import { About } from './components/about.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RandomCoolComponent,
-    SomeNeatNumberList
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RandomCoolComponent,
+        SomeNeatNumberList,
+        About
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

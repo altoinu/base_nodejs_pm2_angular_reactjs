@@ -1,10 +1,12 @@
 <div>
-	<p #MyParagraph>Current time is: {{date.toLocaleTimeString()}}</p>
-	<p #MyParagraph>Some variable within RandomCoolComponent: {{someVariable}} </p>
-	<p>Here is blah.text: {{blah.text}}</p>
-	<button type="button" class="btn btn-success" (click)="buttonGotClicked($event, 'I got clicked')">What time is it?</button>
-	<some-neat-number-list [numbers]="someNeatData">
-		<h3>This is some numbers list</h3>
-		<span>fancy list, yo</span>
-	</some-neat-number-list>
+    <p #MyParagraph>Current time is: {{date.toLocaleTimeString()}}</p>
+    <p #MyParagraph>Some variable within RandomCoolComponent: {{someVariable}} </p>
+    <p>Here is @Input blah.text: {{blah.text}}</p>
+    <button type="button" class="btn btn-success" (click)="onButtonClick($event, 'I got clicked')">
+        What time is it?
+    </button>
+    <some-neat-number-list [numbers]="someNeatData">
+        <h3>This is some numbers list</h3>
+        <span>fancy list, yo</span>
+    </some-neat-number-list>
 </div>

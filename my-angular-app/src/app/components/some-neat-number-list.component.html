@@ -1,12 +1,12 @@
 <div>
-	<!--
-		child elements defined in parent
-		https://angular.io/guide/lifecycle-hooks#content-projection
-	-->
-	<ng-content></ng-content>
-	<ul>
-		<li *ngFor="let thisNumber of numbers">
-			{{ thisNumber.name }}
-		</li>
-	</ul>
+    <!--
+    child elements defined in parent
+    https://angular.io/guide/lifecycle-hooks#content-projection
+    -->
+    <ng-content></ng-content>
+    <ul>
+        <li *ngFor="let thisNumber of numbers">
+            {{ thisNumber.name }}
+        </li>
+    </ul>
 </div>
