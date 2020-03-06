@@ -18,7 +18,7 @@ export class AppComponent {
 
     blah = null;
 
-    private randomCoolComponentButtonClick: Subscription
+    private randomButtonClickEvent: Subscription;
 
     onActivate(activatedComponent) {
 
@@ -29,8 +29,8 @@ export class AppComponent {
             // https://angular.io/api/core/EventEmitter#subscribe
             // https://medium.com/@sujeeshdl/angular-parent-to-child-and-child-to-parent-communication-from-router-outlet-868b39d1ca89
             // https://stackoverflow.com/questions/36494509/how-to-unsubscribe-from-eventemitter-in-angular-2
-            let asdf: RandomCoolComponent = activatedComponent as RandomCoolComponent;
-            this.randomCoolComponentButtonClick = asdf.onRandomButtonClick.subscribe((data) => {
+            const asdf: RandomCoolComponent = activatedComponent as RandomCoolComponent;
+            this.randomButtonClickEvent = asdf.randomButtonClick.subscribe((data) => {
                 this.buttonGotClicked(data.date, data.numClicks);
             });
 
@@ -44,8 +44,8 @@ export class AppComponent {
 
         if (deactivatedComponent instanceof RandomCoolComponent) {
 
-            let asdf: RandomCoolComponent = deactivatedComponent as RandomCoolComponent;
-            this.randomCoolComponentButtonClick.unsubscribe();
+            const asdf: RandomCoolComponent = deactivatedComponent as RandomCoolComponent;
+            this.randomButtonClickEvent.unsubscribe();
 
         }
 

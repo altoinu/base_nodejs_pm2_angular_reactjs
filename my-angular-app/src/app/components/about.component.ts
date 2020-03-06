@@ -8,11 +8,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'about',
+    selector: 'app-about',
     templateUrl: './about.component.html'
-    //styleUrls: ''
+    // styleUrls: ''
 })
-export class About implements OnInit, OnDestroy {
+export class AboutComponent implements OnInit, OnDestroy {
 
     @Input() someprop;
 
