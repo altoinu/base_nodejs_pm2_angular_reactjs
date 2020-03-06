@@ -1,109 +1,115 @@
 import {
-	Component,
-	OnInit,
-	OnDestroy,
-	Input,
-	Output,
-	EventEmitter,
-	ViewChildren,
-	QueryList
+    Component,
+    OnInit,
+    OnDestroy,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChildren,
+    QueryList
 } from '@angular/core';
 import { SomeNeatNumberList } from './some-neat-number-list.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'random-cool-component',
-	templateUrl: 'random-cool.component.html'
-	//styleUrls: ''
+    selector: 'random-cool-component',
+    templateUrl: './random-cool.component.html'
+    //styleUrls: ''
 })
 export class RandomCoolComponent implements OnInit, OnDestroy {
 
-	// https://angular.io/guide/component-interaction#pass-data-from-parent-to-child-with-input-binding
-	@Input() blah;
+    // https://angular.io/guide/component-interaction#pass-data-from-parent-to-child-with-input-binding
+    @Input() blah;
 
-	// https://angular.io/guide/component-interaction#parent-listens-for-child-event
-	//@Outut() onRandomButtonClick = new EventEmitter<{date, numClicks}}>();
-	//@Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
-	@Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
+    // https://angular.io/guide/component-interaction#parent-listens-for-child-event
+    //@Outut() onRandomButtonClick = new EventEmitter<{date, numClicks}}>();
+    //@Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
+    @Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
 
-	// https://netbasal.com/understanding-viewchildren-contentchildren-and-querylist-in-angular-896b0c689f6e
-	@ViewChildren('MyParagraph') paragraph_elements!: QueryList<any>;
-	@ViewChildren(SomeNeatNumberList) numbersList!: QueryList<any>;
+    // https://netbasal.com/understanding-viewchildren-contentchildren-and-querylist-in-angular-896b0c689f6e
+    @ViewChildren('MyParagraph') paragraph_elements!: QueryList<any>;
+    @ViewChildren(SomeNeatNumberList) numbersList!: QueryList<any>;
 
-	date = null;
-	timerID = null;
-	someVariable = 0;
+    date = null;
+    someVariable = 0;
 
-	readonly someNeatData = [
-		{
-			id: 1,
-			name: 'one'
-		},
-		{
-			id: 2,
-			name: 'two'
-		},
-		{
-			id: 3,
-			name: 'three'
-		}
-	];
+    private timerID = null;
 
-	constructor(route: ActivatedRoute) {
+    readonly someNeatData = [
+        {
+            id: 1,
+            name: 'one'
+        },
+        {
+            id: 2,
+            name: 'two'
+        },
+        {
+            id: 3,
+            name: 'three'
+        }
+    ];
 
-		// data passed from route
-		// https://yakovfain.com/2015/11/11/angular-2-passing-data-to-routes/
-		console.log('---', route);
-		console.log('---', route.snapshot);
-		this.blah = route.snapshot.data.blah;
+    constructor(private route: ActivatedRoute) {
 
-		this.date = new Date();
+        // data passed from route
+        // https://yakovfain.com/2015/11/11/angular-2-passing-data-to-routes/
+        console.log('---', route);
+        console.log('---', route.snapshot);
 
-	}
+        this.date = new Date();
 
-	tick() {
+    }
 
-		this.date = new Date();
+    tick() {
 
-	}
+        this.date = new Date();
 
-	// https://angular.io/guide/lifecycle-hooks
-	ngOnInit() {
+    }
 
-		console.log('ngOnInit')
+    // https://angular.io/guide/lifecycle-hooks
+    ngOnInit() {
 
-		this.timerID = setInterval(
-			() => this.tick(),
-			1000
-		);
+        console.log('ngOnInit');
 
-	}
+        // @Input... need to think of better way
+        this.blah = this.route.snapshot.data.blah;
 
-	ngOnDestroy() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
 
-		console.log('ngOnDestroy');
+    }
 
-		clearInterval(this.timerID);
+    ngOnDestroy() {
 
-	}
+        console.log('ngOnDestroy');
 
-	buttonGotClicked(e, msg) {
+        clearInterval(this.timerID);
 
-		console.log(e);
-		console.log(msg);
-		console.log('Time is:', this.date);
+    }
 
-		console.log(this.paragraph_elements);
-		this.paragraph_elements.forEach(element => console.log(element));
-		console.log(this.numbersList);
-		this.numbersList.forEach(element => console.log(element));
+    onButtonClick(e, msg) {
 
-		this.someVariable++;
+        console.log(e);
+        console.log('msg:', msg);
+        console.log('Time is:', this.date);
 
-		// Send data back up to parent via method defined by this.props
-		// https://reactjs.org/docs/lifting-state-up.html
-		this.onRandomButtonClick.emit({ date: this.date, numClicks: this.someVariable });
+        console.log(this.paragraph_elements);
+        this.paragraph_elements.forEach(element => console.log(element));
+        console.log(this.numbersList);
+        this.numbersList.forEach(element => console.log(element));
 
-	}
+        this.someVariable++;
+
+        // Send data back up to parent via method defined by this.props
+        // https://reactjs.org/docs/lifting-state-up.html
+        this.onRandomButtonClick.emit({
+            date: this.date,
+            numClicks: this.someVariable
+        });
+
+    }
 
 }
