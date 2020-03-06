@@ -8,13 +8,13 @@ import {
     ViewChildren,
     QueryList
 } from '@angular/core';
-import { SomeNeatNumberList } from './some-neat-number-list.component';
+import { SomeNeatNumberListComponent } from './some-neat-number-list.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'random-cool-component',
+    selector: 'app-random-cool-component',
     templateUrl: './random-cool.component.html'
-    //styleUrls: ''
+    // styleUrls: ''
 })
 export class RandomCoolComponent implements OnInit, OnDestroy {
 
@@ -22,13 +22,13 @@ export class RandomCoolComponent implements OnInit, OnDestroy {
     @Input() blah;
 
     // https://angular.io/guide/component-interaction#parent-listens-for-child-event
-    //@Outut() onRandomButtonClick = new EventEmitter<{date, numClicks}}>();
-    //@Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
-    @Output() onRandomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
+    // @Outut() randomButtonClick = new EventEmitter<{date, numClicks}}>();
+    // @Output() randomButtonClick = new EventEmitter<{ date: Date, numClicks: Number }>();
+    @Output() randomButtonClick = new EventEmitter<{ date: Date, numClicks: number }>();
 
     // https://netbasal.com/understanding-viewchildren-contentchildren-and-querylist-in-angular-896b0c689f6e
-    @ViewChildren('MyParagraph') paragraph_elements!: QueryList<any>;
-    @ViewChildren(SomeNeatNumberList) numbersList!: QueryList<any>;
+    @ViewChildren('MyParagraph') paragraphElements!: QueryList<any>;
+    @ViewChildren(SomeNeatNumberListComponent) numbersList!: QueryList<any>;
 
     date = null;
     someVariable = 0;
@@ -96,8 +96,8 @@ export class RandomCoolComponent implements OnInit, OnDestroy {
         console.log('msg:', msg);
         console.log('Time is:', this.date);
 
-        console.log(this.paragraph_elements);
-        this.paragraph_elements.forEach(element => console.log(element));
+        console.log(this.paragraphElements);
+        this.paragraphElements.forEach(element => console.log(element));
         console.log(this.numbersList);
         this.numbersList.forEach(element => console.log(element));
 
@@ -105,7 +105,7 @@ export class RandomCoolComponent implements OnInit, OnDestroy {
 
         // Send data back up to parent via method defined by this.props
         // https://reactjs.org/docs/lifting-state-up.html
-        this.onRandomButtonClick.emit({
+        this.randomButtonClick.emit({
             date: this.date,
             numClicks: this.someVariable
         });

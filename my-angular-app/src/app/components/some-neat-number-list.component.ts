@@ -7,11 +7,11 @@ import {
 import { NumberSymbol } from '@angular/common';
 
 @Component({
-    selector: 'some-neat-number-list',
+    selector: 'app-some-neat-number-list',
     templateUrl: './some-neat-number-list.component.html'
-    //styleUrls: ''
+    // styleUrls: ''
 })
-export class SomeNeatNumberList implements OnInit, AfterContentInit {
+export class SomeNeatNumberListComponent implements OnInit, AfterContentInit {
 
     @Input() numbers: object[];
 
