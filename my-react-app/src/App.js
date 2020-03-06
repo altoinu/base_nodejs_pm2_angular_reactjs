@@ -9,6 +9,7 @@ import {
 import logo from './logo.svg';
 import './App.css';
 import RandomCoolComponent from './components/RandomCoolComponent';
+import ReallyAwesomeForm from './components/ReallyAwesomeForm';
 import About from './components/About';
 
 function NoMatch404(props) {
@@ -66,8 +67,14 @@ function App(props) {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link"
-                    to="/">Fill in some form</Link>
+                    to="/form">Fill in some form</Link>
                 </li>
+                {/*
+                <li className="nav-item">
+                  <Link className="nav-link"
+                    to="/do/api">Make some API call</Link>
+                </li>
+                */}
                 <li className="nav-item">
                   {/*
                   <Link className="nav-link"
@@ -88,6 +95,9 @@ function App(props) {
                 <Route path="/" exact>
                   <RandomCoolComponent blah={props.blah}
                     onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
+                </Route>
+                <Route path="/form">
+                  <ReallyAwesomeForm />
                 </Route>
                 <Route path="/about/:superduperparam">
                   <About someprop={'Hello world'} />
