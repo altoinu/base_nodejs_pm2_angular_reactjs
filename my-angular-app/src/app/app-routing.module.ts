@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RandomCoolComponent } from './components/random-cool.component';
-import { About } from './components/about.component';
+import { AboutComponent } from './components/about.component';
 import blah from './models/blah.model';
 
 // Client side routing by angular router
@@ -18,8 +18,9 @@ const routes: Routes = [
         component: RandomCoolComponent,
         pathMatch: 'full',
         data: {
-            blah: blah
+            blah
             /*
+            blah: blah
             blah: {
                 text: '(data defined in app-routing) really cool app, yo',
                 foobar: 'woot'
@@ -29,7 +30,7 @@ const routes: Routes = [
     },
     {
         path: 'about/:superduperparam',
-        component: About,
+        component: AboutComponent,
         data: {
             blah: {
                 text: '(data defined in app-routing) really cool app, yoyo',
