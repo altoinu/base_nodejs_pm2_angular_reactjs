@@ -11,7 +11,8 @@ class AboutInternalComponent extends React.Component {
 
 		return (
 			<div>
-				<p>This is some really nice About page.<br />We got superduperparam from URL: {this.props.superduperparam}</p>
+				<p>This is some really nice About page.<br />
+				We got param from URL /about/:superduperparam - {this.props.superduperparam}</p>
 				<p>Buwahahaha, and another normally passed<br />this.props.someprop: {this.props.someprop}</p>
 			</div>
 		);

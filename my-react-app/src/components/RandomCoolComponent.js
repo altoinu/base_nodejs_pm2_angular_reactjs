@@ -28,6 +28,8 @@ class RandomCoolComponent extends React.Component {
             date: new Date()
         };
 
+        //this.onButtonClick = this.onButtonClick.bind(this);
+
     }
 
     tick() {
@@ -66,7 +68,7 @@ class RandomCoolComponent extends React.Component {
 
     onButtonClick(e, msg) {
 
-        console.log(msg);
+        console.log('msg:', msg);
         console.log('Time is:', this.state.date);
 
         someVariable++;
@@ -85,8 +87,8 @@ class RandomCoolComponent extends React.Component {
                 <p>Some variable within RandomCoolComponent: {someVariable} </p>
                 <p>Here is props.blah.text: {this.props.blah.text}</p>
                 <button type="button"
-                className="btn btn-success"
-                onClick={(e) => this.onButtonClick.call(this, e, 'I got clicked')}>What time is it?</button>
+                    className="btn btn-success"
+                    onClick={(e) => this.onButtonClick(e, 'I got clicked')}>What time is it?</button>
                 {/* Passing children */}
                 <SomeNeatNumberList numbers={someNeatData}>
                     <h3>This is some numbers list</h3>
