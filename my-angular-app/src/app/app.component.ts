@@ -51,7 +51,7 @@ export class AppComponent {
 
     }
 
-    buttonGotClicked(date, numClicks) {
+    buttonGotClicked(date: Date, numClicks: number) {
 
         console.log('buttonGotClicked on App.js:', date);
 
