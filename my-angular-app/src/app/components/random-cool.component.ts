@@ -30,12 +30,12 @@ export class RandomCoolComponent implements OnInit, OnDestroy {
     @ViewChildren('MyParagraph') paragraphElements!: QueryList<any>;
     @ViewChildren(SomeNeatNumberListComponent) numbersList!: QueryList<any>;
 
-    date = null;
+    date: Date = null;
     someVariable = 0;
 
-    private timerID = null;
+    private timerID: number = null;
 
-    readonly someNeatData = [
+    readonly someNeatData: object[] = [
         {
             id: 1,
             name: 'one'
