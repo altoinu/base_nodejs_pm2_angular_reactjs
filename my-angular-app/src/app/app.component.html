@@ -1,59 +1,38 @@
 <div class="App">
-  <header class="App-header">
-    <div class="mainContainer">
-      <nav class="navContainer">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/" routerLinkActive="active">Fill in some form</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/about/wooooot" routerLinkActive="active">About</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="contentContainer">
-        <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
-        <random-cool-component [blah]="blah" (onRandomButtonClick)="buttonGotClicked($event)"></random-cool-component>
-      </div>
-    </div>
-    <!--
-    <BrowserRouter basename="/react">
-      <div className="mainContainer">
-        <nav className="navContainer">
-          <ul className="nav flex-column">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Fill in some form</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={{
-                      pathname: '/about/' + props.blah.foobar,
-                      state: {
-                        someUserDefined: 'Custom data that entered as state object: ' + props.blah.foobar
-                      }
-                    }}>About</Link>
-            </li>
-          </ul>
-        </nav>
-        <div className="contentContainer">
-          <Switch className="wow">
-            <Route path="/" exact>
-              <RandomCoolComponent blah={props.blah} onRandomButtonClick={(date, numClicks)=> buttonGotClicked(date,
-                numClicks)} />
-            </Route>
-            <Route path="/about/:superduperparam">
-              <About someprop={'Hello world'} />
-            </Route>
-            <Route component={NoMatch404} />
-          </Switch>
+    <header class="App-header">
+        <div class="mainContainer">
+            <nav class="navContainer">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/" routerLinkActive="active">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/form" routerLinkActive="active">
+                            Fill in some form
+                        </a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/do/api" routerLinkActive="active">
+                            Make some API call
+                        </a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/about/', blah.foobar]" routerLinkActive="active">
+                            About
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="contentContainer">
+                <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
+                <!--
+                <random-cool-component [blah]="blah" (randomButtonClick)="buttonGotClicked($event.date, $event.numClicks)"></random-cool-component>
+                -->
+            </div>
         </div>
-      </div>
-    </BrowserRouter>
-    -->
-  </header>
+    </header>
 </div>
