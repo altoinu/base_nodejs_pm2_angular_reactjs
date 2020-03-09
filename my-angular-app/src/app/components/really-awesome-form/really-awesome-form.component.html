@@ -1,0 +1,22 @@
+<div>
+    <form [formGroup]="awesomeForm" (ngSubmit)="onFormSubmit(awesomeForm.value)">
+        <h4>Form using Angular FormBuilder</h4>
+        <label>
+            Enter some text here:
+            <input type="text" id="textString" formControlName="textString" />
+        </label>
+        <input type="submit" value="Submit" />
+    </form>
+    <form (ngSubmit)="onFormSubmit(textValue)">
+        <h4>Simple 2 way data binding</h4>
+        <!-- https://angular.io/guide/template-syntax#ngModel -->
+        <label for="without">without NgModel:</label>
+        <input id="without" name="exWithout" [value]="textValue" (input)="textValue = $event.target.value"><br />
+        <label for="example-change">(ngModelChange)="...name=$event":</label>
+        <input id="example-change" name="exChange" [ngModel]="textValue" (ngModelChange)="textValue = $event"><br />
+        <label for="example-ngModel">[(ngModel)] (needs FormsModule):</label>
+        <input id="example-ngModel" name="exNgModel" type="text" [(ngModel)]="textValue" /><br />
+        <input type="submit" value="Submit" />
+        <p>This is what's in the input text: {{textValue}}</p>
+    </form>
+</div>

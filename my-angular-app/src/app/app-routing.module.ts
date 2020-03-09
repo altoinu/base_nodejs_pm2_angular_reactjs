@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RandomCoolComponent } from './components/random-cool/random-cool.component';
+import { ReallyAwesomeFormComponent } from './components/really-awesome-form/really-awesome-form.component';
 import { AboutComponent } from './components/about/about.component';
 import blah from './models/blah.model';
 
@@ -27,6 +28,10 @@ const routes: Routes = [
             }
             */
         }
+    },
+    {
+        path: 'form',
+        component: ReallyAwesomeFormComponent
     },
     {
         path: 'about/:superduperparam',
