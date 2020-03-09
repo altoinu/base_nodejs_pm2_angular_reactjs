@@ -1,6 +1,7 @@
 import React from 'react';
 import SomeNeatNumberList from './SomeNeatNumberList';
 
+// TODO: local variable in class?
 var someVariable = 0;
 
 const someNeatData = [
@@ -50,9 +51,11 @@ class RandomCoolComponent extends React.Component {
 
     }
 
+    // https://reactjs.org/docs/state-and-lifecycle.html
     componentDidMount() {
 
-        // https://reactjs.org/docs/state-and-lifecycle.html
+        console.log('componentDidMount');
+
         this.timerID = setInterval(
             () => this.tick(),
             1000
@@ -62,12 +65,15 @@ class RandomCoolComponent extends React.Component {
 
     componentWillUnmount() {
 
+        console.log('componentWillUnmount');
+
         clearInterval(this.timerID);
 
     }
 
     onButtonClick(e, msg) {
 
+        console.log(e);
         console.log('msg:', msg);
         console.log('Time is:', this.state.date);
 
@@ -88,7 +94,9 @@ class RandomCoolComponent extends React.Component {
                 <p>Here is props.blah.text: {this.props.blah.text}</p>
                 <button type="button"
                     className="btn btn-success"
-                    onClick={(e) => this.onButtonClick(e, 'I got clicked')}>What time is it?</button>
+                    onClick={(e) => this.onButtonClick(e, 'I got clicked')}>
+                    What time is it?
+                </button>
                 {/* Passing children */}
                 <SomeNeatNumberList numbers={someNeatData}>
                     <h3>This is some numbers list</h3>
