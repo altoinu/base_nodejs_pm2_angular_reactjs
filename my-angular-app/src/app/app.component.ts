@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RandomCoolComponent } from './components/random-cool.component';
+import { RandomCoolComponent } from './components/random-cool/random-cool.component';
 import { Subscription } from 'rxjs';
 import blah from './models/blah.model';
 
@@ -51,7 +51,7 @@ export class AppComponent {
 
     }
 
-    buttonGotClicked(date, numClicks) {
+    buttonGotClicked(date: Date, numClicks: number) {
 
         console.log('buttonGotClicked on App.js:', date);
 

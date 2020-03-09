@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RandomCoolComponent } from './components/random-cool.component';
-import { SomeNeatNumberListComponent } from './components/some-neat-number-list.component';
-import { AboutComponent } from './components/about.component';
+import { RandomCoolComponent } from './components/random-cool/random-cool.component';
+import { SomeNeatNumberListComponent } from './components/random-cool/some-neat-number-list/some-neat-number-list.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
     declarations: [
