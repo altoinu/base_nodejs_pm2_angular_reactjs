@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RandomCoolComponent } from './components/random-cool.component';
-import { AboutComponent } from './components/about.component';
+import { RandomCoolComponent } from './components/random-cool/random-cool.component';
+import { AboutComponent } from './components/about/about.component';
 import blah from './models/blah.model';
 
 // Client side routing by angular router

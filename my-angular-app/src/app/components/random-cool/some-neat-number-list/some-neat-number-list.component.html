@@ -1,0 +1,15 @@
+<div>
+    <!--
+    child elements defined in parent
+    https://angular.io/guide/lifecycle-hooks#content-projection
+    -->
+    <ng-content></ng-content>
+    <div>
+        <ul>
+            <li *ngFor="let thisInterestingData of someReallyInterestingData">
+                thisInterestingData.id: {{ thisInterestingData.id }}<br />thisInterestingData.name:
+                {{ thisInterestingData.name }}
+            </li>
+        </ul>
+    </div>
+</div>
