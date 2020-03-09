@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RandomCoolComponent } from './components/random-cool/random-cool.component';
 import { ReallyAwesomeFormComponent } from './components/really-awesome-form/really-awesome-form.component';
 import { AboutComponent } from './components/about/about.component';
+import { NoMatch404Component } from './components/no-match404/no-match404.component';
 import blah from './models/blah.model';
 
 // Client side routing by angular router
@@ -44,12 +45,10 @@ const routes: Routes = [
             someprop: 'Hello world'
         }
     },
-    /*
     {
         path: '**',
-        component: NoMatch404
+        component: NoMatch404Component
     }
-    */
 ];
 
 @NgModule({
