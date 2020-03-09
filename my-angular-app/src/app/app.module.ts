@@ -8,6 +8,7 @@ import { RandomCoolComponent } from './components/random-cool/random-cool.compon
 import { SomeNeatNumberListComponent } from './components/random-cool/some-neat-number-list/some-neat-number-list.component';
 import { ReallyAwesomeFormComponent } from './components/really-awesome-form/really-awesome-form.component';
 import { AboutComponent } from './components/about/about.component';
+import { NoMatch404Component } from './components/no-match404/no-match404.component';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { AboutComponent } from './components/about/about.component';
         RandomCoolComponent,
         SomeNeatNumberListComponent,
         ReallyAwesomeFormComponent,
-        AboutComponent
+        AboutComponent,
+        NoMatch404Component
     ],
     imports: [
         BrowserModule,
