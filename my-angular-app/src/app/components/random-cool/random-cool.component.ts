@@ -18,6 +18,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RandomCoolComponent implements OnInit, OnDestroy {
 
+  // Generating components from CLI
+  // ng generate component components/RandomCool
+  // https://angular.io/cli/generate#component-command
+
   // https://angular.io/guide/component-interaction#pass-data-from-parent-to-child-with-input-binding
   @Input() blah;
 
