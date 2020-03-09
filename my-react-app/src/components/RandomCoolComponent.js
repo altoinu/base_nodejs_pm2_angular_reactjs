@@ -1,9 +1,6 @@
 import React from 'react';
 import SomeNeatNumberList from './SomeNeatNumberList';
 
-// TODO: local variable in class?
-var someVariable = 0;
-
 const someNeatData = [
     {
         id: 1,
@@ -20,6 +17,8 @@ const someNeatData = [
 ];
 
 class RandomCoolComponent extends React.Component {
+
+    someVariable = 0;
 
     constructor(props) {
 
@@ -77,11 +76,11 @@ class RandomCoolComponent extends React.Component {
         console.log('msg:', msg);
         console.log('Time is:', this.state.date);
 
-        someVariable++;
+        this.someVariable++;
 
         // Send data back up to parent via method defined by this.props
         // https://reactjs.org/docs/lifting-state-up.html
-        this.props.onRandomButtonClick(this.state.date, someVariable);
+        this.props.onRandomButtonClick(this.state.date, this.someVariable);
 
     }
 
@@ -90,7 +89,7 @@ class RandomCoolComponent extends React.Component {
         return (
             <div>
                 <p>Current time is: {this.state.date.toLocaleTimeString()}</p>
-                <p>Some variable within RandomCoolComponent: {someVariable} </p>
+                <p>Some variable within RandomCoolComponent: {this.someVariable} </p>
                 <p>Here is props.blah.text: {this.props.blah.text}</p>
                 <button type="button"
                     className="btn btn-success"
