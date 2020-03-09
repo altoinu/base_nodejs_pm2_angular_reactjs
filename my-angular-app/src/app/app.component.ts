@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RandomCoolComponent } from './components/random-cool.component';
+import { RandomCoolComponent } from './components/random-cool/random-cool.component';
 import { Subscription } from 'rxjs';
 import blah from './models/blah.model';
 
