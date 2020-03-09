@@ -11,6 +11,7 @@ import './App.css';
 import RandomCoolComponent from './components/RandomCoolComponent';
 import ReallyAwesomeForm from './components/ReallyAwesomeForm';
 import About from './components/About';
+import blah from './models/BlahModel';
 
 function NoMatch404(props) {
 
@@ -26,7 +27,7 @@ function App(props) {
 
     console.log('buttonGotClicked on App.js:', date);
 
-    props.blah.text = 'I got changed by App.js. Num clicked: ' + numClicks;
+    blah.text = 'I got changed by App.js. Num clicked: ' + numClicks;
 
     alert('Date is:' + date);
 
@@ -78,13 +79,13 @@ function App(props) {
                 <li className="nav-item">
                   {/*
                   <Link className="nav-link"
-                    to={'/about/' + props.blah.foobar}>About</Link>
+                    to={'/about/' + blah.foobar}>About</Link>
                   */}
                   <Link className="nav-link"
                     to={{
-                      pathname: '/about/' + props.blah.foobar,
+                      pathname: '/about/' + blah.foobar,
                       state: {
-                        someUserDefined: 'Custom data that entered as state object: ' + props.blah.foobar
+                        someUserDefined: 'Custom data that entered as state object: ' + blah.foobar
                       }
                     }}>About</Link>
                 </li>
@@ -93,7 +94,7 @@ function App(props) {
             <div className="contentContainer">
               <Switch className="wow">
                 <Route path="/" exact>
-                  <RandomCoolComponent blah={props.blah}
+                  <RandomCoolComponent blah={blah}
                     onRandomButtonClick={(date, numClicks) => buttonGotClicked(date, numClicks)} />
                 </Route>
                 <Route path="/form">
