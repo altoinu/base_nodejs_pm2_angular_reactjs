@@ -30,7 +30,7 @@
   "author": "Kaoru Kawashima",
   "license": "ISC",
   "devDependencies": {
-    "@angular/cli": "^9.0.3",
+    "@angular/cli": "^9.0.5",
     "apidoc": "^0.20.0",
     "autoprefixer": "^9.7.4",
     "cssnano": "^4.1.10",
