@@ -81,6 +81,15 @@ Building for production
 npm run build:angular
 ```
 
+On low memory machine (ex t2.micro on AWS EC2) prod build fails (error code 137). In this case, increase memory limit for node.
+- [https://medium.com/@vuongtran/how-to-solve-process-out-of-memory-in-node-js-5f0de8f8464c](https://medium.com/@vuongtran/how-to-solve-process-out-of-memory-in-node-js-5f0de8f8464c)
+- [https://github.com/npm/npm/issues/12238#issuecomment-301645764](https://github.com/npm/npm/issues/12238#issuecomment-301645764)
+
+```
+node --max-old-space-size=2048 `which npm` build:angular
+```
+Yes, it's a hacky solution...FTP'ing files that are built on other machine is probably better alternative.
+
 ## React Frontend
 
 ```
