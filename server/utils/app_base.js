@@ -45,7 +45,7 @@
  *          }
  *       }
  *    ],
- *    routeSetterDef: RouteSetter([
+ *    routesDef: RouteSetter([
  *       path.join(__dirname, '/routes/ConfigRoute.js'),
  *       {
  *          route: express.Router() or require('...'),
@@ -89,7 +89,7 @@ var CONSTANTS = require('../models/constants.js');
  * @param {Object} config - App configuration.
  * @param {Object[]} [config.appSettings]
  * @param {Object[]} [config.middleware]
- * @param {Object} [config.routeSetterDef] - RouteSetter object
+ * @param {Object} [config.routesDef] - RouteSetter object
  * @param {Object} [config.baseUrl] - Base URL
  * @param {string} config.serverPort - Port number for server.
  */
@@ -107,7 +107,7 @@ var app_base = function (logPrefix, config) {
 
 	var appSettings = config.hasOwnProperty('appSettings') ? config.appSettings : null;
 	var middleware = config.hasOwnProperty('middleware') ? config.middleware : null;
-	var routeSetterDef = config.hasOwnProperty('routeSetterDef') ? config.routeSetterDef : null;
+	var routesDef = config.hasOwnProperty('routesDef') ? config.routesDef : null;
 	var baseUrl = config.hasOwnProperty('baseUrl') ? config.baseUrl : null;
 	if (baseUrl)
 		baseUrl = (baseUrl.charAt(0) != '/' ? '/' : '') + baseUrl;
@@ -209,14 +209,14 @@ var app_base = function (logPrefix, config) {
 	}
 
 	// routes
-	if (routeSetterDef) {
+	if (routesDef) {
 
-		// If path specified, mount routes to there [baseUrl]/[routeSetterDef routes]...
-		// (ex baseUrl == /api then /api/[routeSetterDef routes]...
+		// If path specified, mount routes to there [baseUrl]/[routesDef routes]...
+		// (ex baseUrl == /api then /api/[routesDef routes]...
 		if (baseUrl)
-			app.use(baseUrl, routeSetterDef.routes);
+			app.use(baseUrl, routesDef.routes);
 		else
-			app.use(routeSetterDef.routes);
+			app.use(routesDef.routes);
 
 	}
 
@@ -322,7 +322,7 @@ var app_base = function (logPrefix, config) {
 
 				})(),
 				// shutdown routes
-				routeSetterDef.shutdown()
+				routesDef.shutdown()
 			]);
 
 		}

@@ -57,6 +57,18 @@ function RouteSetter(routesDef) {
 	//
 	// --------------------------------------------------------------------------
 
+	/*
+	 * router
+	 *    .use(routeCheck()
+	 *    .use(subRouter
+	 *       .use(subSubRouter
+	 *          .use(routeCheck()
+	 *          .use(route definition
+	 *       .use(subSubRouter
+	 *          .use(routeCheck()
+	 *          .use(route definition
+	 *       ...
+	 */
 	var router = mod_express.Router();
 
 	// --------------------------------------------------------------------------
