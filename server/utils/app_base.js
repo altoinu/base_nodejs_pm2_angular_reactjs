@@ -1,7 +1,7 @@
 /**
  * Function to create Express app and server
  * @module app_base
- * @version 1.2.1 2020-02-28
+ * @version 1.2.2 2020-04-06
  * @requires express
  * @requires cookie-parser
  * @requires morgan
