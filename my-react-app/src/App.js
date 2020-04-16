@@ -84,6 +84,7 @@ function App(props) {
                   <Link className="nav-link"
                     to={{
                       pathname: '/about/' + blah.foobar,
+                      search: '?someneatquerystring=helloworld',
                       state: {
                         someUserDefined: 'Custom data that entered as state object: ' + blah.foobar
                       }

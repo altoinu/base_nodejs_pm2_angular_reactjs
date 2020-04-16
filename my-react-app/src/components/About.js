@@ -24,13 +24,18 @@ class AboutInternalComponent extends React.Component {
         return (
             <div>
                 <p>This is some really nice About page.<br />
-                    We got param from URL /about/:superduperparam - {this.props.superduperparam}</p>
+                    We got param from URL /about/:superduperparam - {this.props.superduperparam}<br />
+                    We got query string someneatquerystring - {this.props.someneatquerystring}</p>
                 <p>Buwahahaha, and another normally passed<br />this.props.someprop: {this.props.someprop}</p>
             </div>
         );
 
     }
 
+}
+
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
 }
 
 function About(props) {
@@ -40,7 +45,10 @@ function About(props) {
 
     let params = useParams();
     //let superduperparam = params.superduperparam;
-    let {superduperparam} = useParams();
+    let { superduperparam } = useParams();
+
+    let query = useQuery();
+    let someneatquerystring = query.get('someneatquerystring');
 
     console.log('history in About', history);
     console.log('location in About', location);
@@ -64,7 +72,10 @@ function About(props) {
     */
 
     return (
-        <AboutInternalComponent superduperparam={superduperparam} someprop={props.someprop}>
+        <AboutInternalComponent
+            superduperparam={superduperparam}
+            someneatquerystring={someneatquerystring}
+            someprop={props.someprop}>
             {/* Passing useParams to internally defined class */}
         </AboutInternalComponent>
     );
