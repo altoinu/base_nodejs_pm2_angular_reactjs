@@ -21,7 +21,10 @@
                     </li>
                     -->
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/about/', blah.foobar]" routerLinkActive="active">
+                        <a class="nav-link"
+                        [routerLink]="['/about/', blah.foobar]"
+                        [queryParams]="{someneatquerystring: 'helloworld', width: 950, height: 520}"
+                        routerLinkActive="active">
                             About
                         </a>
                     </li>
