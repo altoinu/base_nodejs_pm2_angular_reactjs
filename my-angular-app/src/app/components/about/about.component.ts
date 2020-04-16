@@ -81,10 +81,8 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.queryParamUpdate = this.route.queryParams.subscribe(queryParams => {
 
       this.someneatquerystring = this.route.snapshot.queryParamMap.get('someneatquerystring');
-      this.width = Number(this.route.snapshot.queryParamMap.get('width'));
-      this.height = Number(this.route.snapshot.queryParamMap.get('height'));
 
-      console.log(this.someneatquerystring, this.width, this.height);
+      console.log(this.someneatquerystring);
 
     });
 
