@@ -9,7 +9,7 @@ git reset --hard HEAD
 git pull
 
 # Make sure node modules are up to date
-cd ~/source/server
+cd ~/source
 npm install
 
 # graceful restart
