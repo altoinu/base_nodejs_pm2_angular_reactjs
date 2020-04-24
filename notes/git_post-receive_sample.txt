@@ -10,7 +10,7 @@ git pull
 
 # Make sure node modules are up to date
 cd ~/source
-npm install
+npm ci
 
 # graceful restart
 cd ~/source
