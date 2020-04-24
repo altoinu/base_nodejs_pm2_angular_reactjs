@@ -11,6 +11,8 @@
  * @example
  * var app_base = require('app_base.js');
  * var appObj = app_base('app_base, app.js:', {
+ *    baseUrl: '/some/base/path',
+ *    serverPort: 3000,
  *    appSettings: [
  *       {
  *          name: 'views',
@@ -33,16 +35,30 @@
  *       cors.allow,
  *       $express.static(path.join(__dirname, '../public')),
  *       {
- *          baseUrl: '/react',
- *          middleware: $express.static(path.join(__dirname, '../my-react-app/build'))
+ *          baseUrl: '/angular',
+ *          middleware: $express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app'))
  *       },
  *       {
- *          baseUrl: '/react/*',
+ *          baseUrl: '/angular/*',
  *          method: 'GET',
  *          middleware: function (req, res) {
  *             // redirect to index.html
- *             res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+ *             res.sendFile(path.join(__dirname, '../my-angular-app/dist/my-angular-app', 'index.html'));
  *          }
+ *       },
+ *       {
+ *          baseUrl: '/react',
+ *          middleware: (function() {
+ *             var router = $express.Router();
+ *             var filePath = '../my-react-app/build';
+ *             router.use($express.static(path.join(__dirname, filePath)));
+ *             router.get('/*', function(req, res) {
+ *                // redirect to index.html
+ *                res.sendFile(path.join(__dirname, filePath, 'index.html'));
+ *             });
+ * 
+ *             return router;
+ *          })()
  *       }
  *    ],
  *    routesDef: RouteSetter([
@@ -55,9 +71,7 @@
  *             return $q.resolve();
  *          }
  *       }
- *    ]);,
- *    baseUrl: '/some/base/path',
- *    serverPort: 3000
+ *    ])
  * });
  * 
  * @todo Sample TODO text
@@ -87,11 +101,11 @@ var CONSTANTS = require('../models/constants.js');
 /**
  * @param {string} logPrefix
  * @param {Object} config - App configuration.
+ * @param {Object} [config.baseUrl] - Base URL
+ * @param {string} config.serverPort - Port number for server.
  * @param {Object[]} [config.appSettings]
  * @param {Object[]} [config.middleware]
  * @param {Object} [config.routesDef] - RouteSetter object
- * @param {Object} [config.baseUrl] - Base URL
- * @param {string} config.serverPort - Port number for server.
  */
 var app_base = function (logPrefix, config) {
 

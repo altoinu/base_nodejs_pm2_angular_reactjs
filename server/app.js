@@ -73,6 +73,9 @@ console.log('process:', process.pid);
 console.log('cluster.isMaster:', cluster.isMaster);
 
 var appObj = app_base('app_base, app.js:', {
+	//baseUrl: '/some/base/path',
+	//baseUrl: CONFIG.API.path
+	serverPort: port,
 	appSettings: [
 		{
 			name: 'views',
@@ -106,7 +109,9 @@ var appObj = app_base('app_base, app.js:', {
 
 				var router = $express.Router();
 
-				router.use($express.static(path.join(__dirname, '../my-angular-app/dist/my-angular-app')));
+				var filePath = '../my-angular-app/dist/my-angular-app';
+
+				router.use($express.static(path.join(__dirname, filePath)));
 
 				// For when using client side routing like angular router and sub folder on server
 				// (ex http://www.example.com/path/to/angular/app/)
@@ -120,7 +125,7 @@ var appObj = app_base('app_base, app.js:', {
 					//console.log(req.url);
 
 					// redirect to index.html so client side routing can take over
-					res.sendFile(path.join(__dirname, '../my-angular-app/dist/my-angular-app', 'index.html'));
+					res.sendFile(path.join(__dirname, filePath, 'index.html'));
 
 				});
 
@@ -143,8 +148,10 @@ var appObj = app_base('app_base, app.js:', {
 				//console.log(req.path);
 				//console.log(req.url);
 
+				var filePath = '../my-angular-app/dist/my-angular-app';
+
 				// redirect to index.html so client side routing can take over
-				res.sendFile(path.join(__dirname, '../my-angular-app/dist/my-angular-app', 'index.html'));
+				res.sendFile(path.join(__dirname, filePath, 'index.html'));
 
 			}
 		},
@@ -156,7 +163,9 @@ var appObj = app_base('app_base, app.js:', {
 
 				var router = $express.Router();
 
-				router.use($express.static(path.join(__dirname, '../my-react-app/build')));
+				var filePath = '../my-react-app/build';
+
+				router.use($express.static(path.join(__dirname, filePath)));
 
 				// For when using client side routing like react-router and sub folder on server
 				// (ex http://www.example.com/path/to/react/app/)
@@ -169,7 +178,7 @@ var appObj = app_base('app_base, app.js:', {
 					//console.log(req.url);
 
 					// redirect to index.html so client side routing can take over
-					res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+					res.sendFile(path.join(__dirname, filePath, 'index.html'));
 
 				});
 
@@ -191,8 +200,10 @@ var appObj = app_base('app_base, app.js:', {
 				//console.log(req.path);
 				//console.log(req.url);
 
+				var filePath = '../my-react-app/build';
+
 				// redirect to index.html so client side routing can take over
-				res.sendFile(path.join(__dirname, '../my-react-app/build', 'index.html'));
+				res.sendFile(path.join(__dirname, filePath, 'index.html'));
 
 			}
 		}
@@ -222,10 +233,7 @@ var appObj = app_base('app_base, app.js:', {
 			}
 		}
 		*/
-	]),
-	//baseUrl: '/some/base/path',
-	//baseUrl: CONFIG.API.path
-	serverPort: port
+	])
 });
 
 module.exports = {
