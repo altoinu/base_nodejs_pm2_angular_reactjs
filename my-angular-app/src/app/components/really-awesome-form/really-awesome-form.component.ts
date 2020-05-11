@@ -13,11 +13,12 @@ import { FormBuilder } from '@angular/forms';
 export class ReallyAwesomeFormComponent implements OnInit, AfterContentInit {
 
   awesomeForm;
-  textValue: string = '';
+  textValue = '';
 
   constructor(private formBuilder: FormBuilder) {
 
     // https://angular.io/start/start-forms
+    // https://angular.io/api/forms/FormBuilder
     this.awesomeForm = formBuilder.group({
       // name to match formControlName
       textString: ''
@@ -29,6 +30,22 @@ export class ReallyAwesomeFormComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+
+  }
+
+  onInputChange(data) {
+
+    console.log('input change');
+
+    this.textValue = data;
+
+  }
+
+  onNgModelChange(data) {
+
+    console.log('ngModelChange change');
+
+    this.textValue = data;
 
   }
 

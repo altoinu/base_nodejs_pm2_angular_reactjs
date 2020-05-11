@@ -1,21 +1,27 @@
 <div>
+    <!--
+        https://angular.io/start/start-forms
+        https://angular.io/api/forms/FormBuilder
+    -->
     <form [formGroup]="awesomeForm" (ngSubmit)="onFormSubmit(awesomeForm.value)">
         <h4>Form using Angular FormBuilder</h4>
-        <label>
-            Enter some text here:
-            <input type="text" id="textString" formControlName="textString" />
-        </label>
+        <label for="textString">Enter some text here, click submit and see console:</label>
+        <input type="text" id="textString" formControlName="textString" />
         <input type="submit" value="Submit" />
     </form>
     <form (ngSubmit)="onFormSubmit(textValue)">
         <h4>Simple 2 way data binding</h4>
+
+        <label for="without">[value]="textValue" and (input)="textValue = $event.target.value":</label>
+        <input id="without" name="exWithout" [value]="textValue" (input)="onInputChange($event.target.value);"><br />
+
+        <label for="example-change">[ngModel]="textValue" and (ngModelChange)="...name=$event":</label>
+        <input id="example-change" name="exChange" [ngModel]="textValue" (ngModelChange)="onNgModelChange($event);"><br />
+
         <!-- https://angular.io/guide/template-syntax#ngModel -->
-        <label for="without">without NgModel:</label>
-        <input id="without" name="exWithout" [value]="textValue" (input)="textValue = $event.target.value"><br />
-        <label for="example-change">(ngModelChange)="...name=$event":</label>
-        <input id="example-change" name="exChange" [ngModel]="textValue" (ngModelChange)="textValue = $event"><br />
-        <label for="example-ngModel">[(ngModel)] (needs FormsModule):</label>
+        <label for="example-ngModel">[(ngModel)]="textValue" (needs FormsModule):</label>
         <input id="example-ngModel" name="exNgModel" type="text" [(ngModel)]="textValue" /><br />
+
         <input type="submit" value="Submit" />
         <p>This is what's in the input text: {{textValue}}</p>
     </form>
