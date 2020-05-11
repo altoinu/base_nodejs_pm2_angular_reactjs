@@ -93,6 +93,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     console.log('About ngOnDestroy');
 
     this.routeParamUpdate.unsubscribe();
+    this.queryParamUpdate.unsubscribe();
 
   }
 
