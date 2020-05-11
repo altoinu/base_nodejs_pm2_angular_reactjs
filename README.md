@@ -2,8 +2,8 @@
 [https://help.github.com/en/articles/basic-writing-and-formatting-syntax](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
 ## Node stuff
-- Node.js (v13.12.0) and npm [https://nodejs.org/](https://nodejs.org/)
-- PM2 (v4.2.3) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
+- Node.js (v14.2.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- PM2 (v4.4.0) [http://pm2.keymetrics.io](http://pm2.keymetrics.io)
 
 ## Initial set up
 ```
