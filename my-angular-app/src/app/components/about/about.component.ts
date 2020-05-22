@@ -78,6 +78,8 @@ export class AboutComponent implements OnInit, OnDestroy {
     );
     */
 
+    // TODO: Clean to match route param map above?
+
     this.queryParamUpdate = this.route.queryParams.subscribe(queryParams => {
 
       this.someneatquerystring = this.route.snapshot.queryParamMap.get('someneatquerystring');

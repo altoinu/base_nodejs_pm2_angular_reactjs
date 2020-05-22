@@ -209,6 +209,7 @@ var appObj = app_base('app_base, app.js:', {
 		}
 		*/
 	],
+	// TODO: deprecate RouteSetter?
 	routesDef: RouteSetter([
 		path.join(__dirname, '/routes/ConfigRoute.js'),
 		/*

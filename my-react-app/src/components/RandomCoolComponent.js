@@ -86,6 +86,8 @@ class RandomCoolComponent extends React.Component {
 
     render() {
 
+        // TODO: put JSX into separate file?
+
         return (
             <div>
                 <p>Current time is: {this.state.date.toLocaleTimeString()}</p>

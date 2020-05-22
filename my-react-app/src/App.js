@@ -70,7 +70,7 @@ function App(props) {
                   <Link className="nav-link"
                     to="/form">Fill in some form</Link>
                 </li>
-                {/*
+                {/* TODO:
                 <li className="nav-item">
                   <Link className="nav-link"
                     to="/do/api">Make some API call</Link>
