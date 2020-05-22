@@ -6,7 +6,7 @@
  * @example
  * var Logger = require('Logger.js');
  * var logger = new Logger();
- * logger.prefix = 'RouteSetter:';
+ * logger.prefix = 'LOG PREFIX:';
  * logger.log('hello');
  */
 
@@ -49,7 +49,7 @@
 	 * @example
 	 * var Logger = require('Logger.js');
 	 * var logger = new Logger();
-	 * logger.prefix = 'RouteSetter:';
+	 * logger.prefix = 'LOG PREFIX:';
 	 * logger.log('hello');
 	 */
 	var Logger = function(enabled) {

@@ -13,7 +13,7 @@ var $express = require('express');
 var $q = require('q');
 
 var app_base = require('./utils/app_base.js');
-var RouteSetter = require('./utils/RouteSetter.js');
+var RouteDefinition = require('./utils/RouteDefinition.js');
 
 var app_vars = require('./models/app_vars.js');
 
@@ -96,6 +96,41 @@ var appObj = app_base('app_base, app.js:', {
 			extended: true
 		}),
 		cors.allow,
+		RouteDefinition([
+			path.join(__dirname, '/routes/ConfigRoute.js'),
+			{
+				route: path.join(__dirname, '/routes/ConfigRoute.js'),
+				baseUrl: '/whatever', //optional
+				shutdown: function () {
+	
+					console.log('shutdown for route /routes/ConfigRoute.js under /whatever');
+					return $q.resolve();
+	
+				}
+			}
+			/*
+			{
+				route: path.join(__dirname, '/routes/ConfigRoute.js'),
+				baseUrl: '/whatever', //optional
+				shutdown: function () {
+	
+					console.log('shutdown for this route');
+					return $q.resolve();
+	
+				}
+			}
+			{
+				route: path to module, instance of express.Router(), or require('path to express.Router() module'),
+				baseUrl: '/whatever', //optional
+				shutdown: function() {
+					
+					console.log('shutdown for this route');
+					return $q.resolve();
+					
+				}
+			}
+			*/
+		]),
 		//$express.static(path.join(__dirname, '../public'))
 		// Angularjs front end *********************************************************
 		{
@@ -208,33 +243,7 @@ var appObj = app_base('app_base, app.js:', {
 			}
 		}
 		*/
-	],
-	// TODO: deprecate RouteSetter?
-	routesDef: RouteSetter([
-		path.join(__dirname, '/routes/ConfigRoute.js'),
-		/*
-		{
-			route: path.join(__dirname, '/routes/ConfigRoute.js'),
-			baseUrl: '/whatever', //optional
-			shutdown: function () {
-
-				console.log('shutdown for this route');
-				return $q.resolve();
-
-			}
-		}
-		{
-			route: path to module, instance of express.Router(), or require('path to express.Router() module'),
-			baseUrl: '/whatever', //optional
-			shutdown: function() {
-				
-				console.log('shutdown for this route');
-				return $q.resolve();
-				
-			}
-		}
-		*/
-	])
+	]
 });
 
 module.exports = {

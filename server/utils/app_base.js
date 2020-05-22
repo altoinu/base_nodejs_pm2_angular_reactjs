@@ -1,12 +1,12 @@
 /**
  * Function to create Express app and server
  * @module app_base
- * @version 1.2.2 2020-04-06
+ * @version 1.3.0 2020-05-21
  * @requires express
  * @requires cookie-parser
  * @requires morgan
  * @requires q
- * @requires module:RouteSetter
+ * @requires module:RouteDefinition
  * 
  * @example
  * var app_base = require('app_base.js');
@@ -33,6 +33,17 @@
  *          extended: true
  *       }),
  *       cors.allow,
+ *       RouteDefinition([
+ *          path.join(__dirname, '/routes/ConfigRoute.js'),
+ *          {
+ *             route: express.Router() or require('...'),
+ *             baseUrl: '/whatever', //optional
+ *             shutdown: function() {
+ *                console.log('shutdown for this route');
+ *                return $q.resolve();
+ *             }
+ *          }
+ *       ]),
  *       $express.static(path.join(__dirname, '../public')),
  *       {
  *          baseUrl: '/angular',
@@ -60,8 +71,13 @@
  *             return router;
  *          })()
  *       }
- *    ],
- *    routesDef: RouteSetter([
+ *    ]
+ * });
+ * 
+ * @todo Sample TODO text
+ */
+/*
+ *    routesDef: RouteDefinition([
  *       path.join(__dirname, '/routes/ConfigRoute.js'),
  *       {
  *          route: express.Router() or require('...'),
@@ -72,9 +88,6 @@
  *          }
  *       }
  *    ])
- * });
- * 
- * @todo Sample TODO text
  */
 var VERSION = '1.2.1';
 
@@ -105,7 +118,9 @@ var CONSTANTS = require('../models/constants.js');
  * @param {string} config.serverPort - Port number for server.
  * @param {Object[]} [config.appSettings]
  * @param {Object[]} [config.middleware]
- * @param {Object} [config.routesDef] - RouteSetter object
+ */
+/*
+ * @param {Object} [config.routesDef] - RouteDefinition object
  */
 var app_base = function (logPrefix, config) {
 
@@ -121,6 +136,7 @@ var app_base = function (logPrefix, config) {
 
 	var appSettings = config.hasOwnProperty('appSettings') ? config.appSettings : null;
 	var middleware = config.hasOwnProperty('middleware') ? config.middleware : null;
+	// DEPRECATED - routesDef	
 	var routesDef = config.hasOwnProperty('routesDef') ? config.routesDef : null;
 	var baseUrl = config.hasOwnProperty('baseUrl') ? config.baseUrl : null;
 	if (baseUrl)
@@ -222,7 +238,7 @@ var app_base = function (logPrefix, config) {
 
 	}
 
-	// routes
+	// DEPRECATED - routesDef
 	if (routesDef) {
 
 		// If path specified, mount routes to there [baseUrl]/[routesDef routes]...
@@ -323,7 +339,7 @@ var app_base = function (logPrefix, config) {
 		server: server,
 		shutdown: function () {
 
-			return mod_Q.allSettled([
+			var shutdownPromises = [
 				// shutdown server
 				(function () {
 
@@ -334,10 +350,28 @@ var app_base = function (logPrefix, config) {
 
 					return deferred.promise;
 
-				})(),
-				// shutdown routes
-				routesDef.shutdown()
-			]);
+				})()
+			];
+
+			// shutdown methods
+			if (middleware) {
+
+				shutdownPromises = shutdownPromises.concat(middleware.reduce(function (shutdownActions, mid, index, array) {
+
+					if (mid.hasOwnProperty('shutdown'))
+						shutdownActions.push(mid.shutdown());
+
+					return shutdownActions;
+
+				}, []));
+
+			}
+
+			// DEPRECATED - shutdown for routesDef
+			if (routesDef)
+				shutdownPromises.push(routesDef.shutdown());
+
+			return mod_Q.allSettled(shutdownPromises);
 
 		}
 	};
