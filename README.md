@@ -1,3 +1,11 @@
+## \*\*\*This project is deprecated.\*\*\*
+
+More up-to-date ones:
+- React/Create React App base project [https://github.com/altoinu/base_react_project-20240905](https://github.com/altoinu/base_react_project-20240905)
+- React/Next.js [https://github.com/altoinu/base_react_nextjs_project-20241220](https://github.com/altoinu/base_react_nextjs_project-20241220)
+- Node.js base project [https://github.com/altoinu/base_nodejs_project-20241223](https://github.com/altoinu/base_nodejs_project-20241223)
+- Node.js/Express server set up [https://github.com/altoinu/base_nodejs_express_project-20241224](https://github.com/altoinu/base_nodejs_express_project-20241224)
+
 ## Writing README stuff
 [https://help.github.com/en/articles/basic-writing-and-formatting-syntax](https://help.github.com/en/articles/basic-writing-and-formatting-syntax)
 
